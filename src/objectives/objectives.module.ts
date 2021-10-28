@@ -4,6 +4,6 @@ import { ObjectivesController } from './objectives.controller';
 
 @Module({
   providers: [ObjectivesService],
-  controllers: [ObjectivesController]
+  controllers: [ObjectivesController],
 })
 export class ObjectivesModule {}
