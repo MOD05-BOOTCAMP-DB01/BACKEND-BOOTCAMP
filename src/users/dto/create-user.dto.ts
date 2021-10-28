@@ -5,7 +5,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { User } from '../entities/user.entity';
+
 export class CreateUserDto {
   @IsOptional()
   id: number;
@@ -19,14 +19,14 @@ export class CreateUserDto {
 
   @IsNotEmpty({ message: 'Informe um endereço de e-mail.' })
   @IsEmail({}, { message: 'Informe um endereço de e-mail válido.' })
-  @MaxLength(100,{message: 'O email deve conter no maximo 100 caracteres.' })
+  @MaxLength(100, { message: 'O email deve conter no maximo 100 caracteres.' })
   email: string;
 
   @IsNotEmpty({
     message: 'Informe um endereço de e-mail igual ao campo email.',
   })
   @IsEmail({}, { message: 'Informe um endereço de e-mail válido.' })
-  @MaxLength(100,{message: 'O email deve conter no maximo 100 caracteres.' })
+  @MaxLength(100, { message: 'O email deve conter no maximo 100 caracteres.' })
   confirmationEmail: string;
 
   @IsNotEmpty({
@@ -39,8 +39,12 @@ export class CreateUserDto {
   @IsNotEmpty({
     message: 'A confirmação da senha deve ser iguais.',
   })
-  @MaxLength(100, { message: 'A senha deve ter no maximo 100 caracteres' })
-  @MinLength(8, { message: 'A senha deve conter no minimo 8 caracteres' })
+  @MaxLength(100, {
+    message: 'A senha deve ter no maximo 100 caracteres e ser igual a senha.',
+  })
+  @MinLength(8, {
+    message: 'A senha deve conter no minimo 8 caracteres  e se igual a senha.',
+  })
   confirmationPassword: string;
 
   @IsNotEmpty({
