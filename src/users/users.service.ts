@@ -1,11 +1,24 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnprocessableEntityException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './entities/user.entity';
+import { UserRepository } from './users.repository';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(
+    @InjectRepository(UserRepository)
+    private userRepository: UserRepository,
+  ) {}
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
+    if (createUserDto.password != createUserDto.confirmationPassword) {
+      throw new UnprocessableEntityException('As senhas não conferem');
+    } else if (createUserDto.email != createUserDto.confirmationEmail) {
+      throw new UnprocessableEntityException('Os e-mails não conferem');
+    } else {
+      return this.userRepository.createUser(createUserDto);
+    }
   }
 
   findAll() {
