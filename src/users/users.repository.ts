@@ -1,25 +1,35 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { User } from './entities/user.entity';
-import { CreateUserDto } from './dto/create-user.dto';
+import { User } from './user.entity';
+import { CreateUserDto } from './dtos/create-user.dto';
+import { UserRole } from './user-roles.enum';
+import * as bcrypt from 'bcrypt';
 import {
   ConflictException,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { FindUsersQueryDto } from './dto/find-users-query.dto';
+import { CredentialsDto } from '../auth/dtos/credentials.dto';
+import { FindUsersQueryDto } from './dtos/find-users-query.dto';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
-  async createUser(createUserDto: CreateUserDto): Promise<User> {
-    const { name, email, password } = createUserDto;
+  async createUser(
+    createUserDto: CreateUserDto,
+    role: UserRole,
+  ): Promise<User> {
+    const { email, username, password } = createUserDto;
 
     const user = this.create();
-    user.name = name;
     user.email = email;
-    user.password = password;
+    user.username = username;
+    user.password = await this.hashPassword(password, user.salt);
+    user.role = role;
+    user.status = true;
+    user.salt = await bcrypt.genSalt();
 
     try {
       await user.save();
       delete user.password;
+      delete user.salt;
       return user;
     } catch (error) {
       if (error.code.toString() === '23505') {
@@ -39,7 +49,7 @@ export class UserRepository extends Repository<User> {
     queryDto.limit = queryDto.limit > 100 ? 100 : queryDto.limit;
     queryDto.status = queryDto.status === undefined ? true : queryDto.status;
 
-    const { email, name, status, role } = queryDto;
+    const { email, username, status, role } = queryDto;
     const query = this.createQueryBuilder('user');
     query.where('user.status = :status', { status });
 
@@ -47,9 +57,9 @@ export class UserRepository extends Repository<User> {
       query.andWhere('user.email ILIKE :email', { email: `%${email}%` });
     }
 
-    if (name) {
+    if (username) {
       query.andWhere('user.username ILIKE :username', {
-        username: `%${name}%`,
+        username: `%${username}%`,
       });
     }
 
@@ -65,5 +75,27 @@ export class UserRepository extends Repository<User> {
     const [users, total] = await query.getManyAndCount();
 
     return { users, total };
+  }
+
+  async changePassword(id: string, password: string) {
+    const user = await this.findOne(id);
+    user.salt = await bcrypt.genSalt();
+    user.password = await this.hashPassword(password, user.salt);
+    user.recoverToken = null;
+    await user.save();
+  }
+
+  async checkCredentials(credentialsDto: CredentialsDto): Promise<User> {
+    const { email, password } = credentialsDto;
+    const user = await this.findOne({ email, status: true });
+    if (user && (await user.checkPassword(password))) {
+      return user;
+    } else {
+      return null;
+    }
+  }
+
+  private async hashPassword(password: string, salt: string): Promise<string> {
+    return bcrypt.hash(password, salt);
   }
 }

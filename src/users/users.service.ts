@@ -1,15 +1,16 @@
 import {
   Injectable,
-  InternalServerErrorException,
   NotFoundException,
   UnprocessableEntityException,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateUserDto } from './dto/create-user.dto';
-import { FindUsersQueryDto } from './dto/find-users-query.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './entities/user.entity';
 import { UserRepository } from './users.repository';
+import { CreateUserDto } from './dtos/create-user.dto';
+import { User } from './user.entity';
+import { UserRole } from './user-roles.enum';
+import { UpdateUserDto } from './dtos/update-user.dto';
+import { FindUsersQueryDto } from './dtos/find-users-query.dto';
 
 @Injectable()
 export class UsersService {
@@ -17,23 +18,45 @@ export class UsersService {
     @InjectRepository(UserRepository)
     private userRepository: UserRepository,
   ) {}
+
   async createUser(createUserDto: CreateUserDto): Promise<User> {
-    if (createUserDto.password != createUserDto.confirmationPassword) {
+    if (createUserDto.password != createUserDto.passwordConfirmation) {
       throw new UnprocessableEntityException('As senhas não conferem');
-    } else if (createUserDto.email != createUserDto.confirmationEmail) {
-      throw new UnprocessableEntityException('Os e-mails não conferem');
     } else {
-      return this.userRepository.createUser(createUserDto);
+      return this.userRepository.createUser(createUserDto, UserRole.USER);
+    }
+  }
+
+  async createAdminUser(createUserDto: CreateUserDto): Promise<User> {
+    if (createUserDto.password != createUserDto.passwordConfirmation) {
+      throw new UnprocessableEntityException('As senhas não conferem');
+    } else {
+      return this.userRepository.createUser(createUserDto, UserRole.ADMIN);
+    }
+  }
+
+  async createManagerUser(createUserDto: CreateUserDto): Promise<User> {
+    if (createUserDto.password != createUserDto.passwordConfirmation) {
+      throw new UnprocessableEntityException('As senhas não conferem');
+    } else {
+      return this.userRepository.createUser(createUserDto, UserRole.MANAGER);
     }
   }
 
   async findAll() {
-    return this.userRepository.find({});
+    return this.userRepository.find();
   }
 
-  async findUserById(userId: string): Promise<User> {
+  async findUsers(
+    queryDto: FindUsersQueryDto,
+  ): Promise<{ users: User[]; total: number }> {
+    const users = await this.userRepository.findUsers(queryDto);
+    return users;
+  }
+
+  async findOne(userId: string): Promise<User> {
     const user = await this.userRepository.findOne(userId, {
-      select: ['name', 'email', 'role'],
+      select: ['email', 'username', 'role', 'id'],
     });
 
     if (!user) throw new NotFoundException('Usuário não encontrado');
@@ -42,11 +65,12 @@ export class UsersService {
   }
 
   async updateUser(updateUserDto: UpdateUserDto, id: string): Promise<User> {
-    const user = await this.findUserById(id);
-    const { name, email, role } = updateUserDto;
-    user.name = name ? name : user.name;
+    const user = await this.findOne(id);
+    const { username, email, role, status } = updateUserDto;
+    user.username = username ? username : user.username;
     user.email = email ? email : user.email;
     user.role = role ? role : user.role;
+    user.status = status ? status : user.status;
 
     try {
       await user.save();
@@ -59,7 +83,7 @@ export class UsersService {
   }
 
   async deleteUser(userId: string) {
-    const result = await this.userRepository.delete({id : userId});
+    const result = await this.userRepository.delete({ id: userId });
     if (result.affected === 0) {
       throw new NotFoundException(
         'Não foi encontrado um usuário com o ID informado',
