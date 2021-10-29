@@ -1,16 +1,16 @@
 import {
   BaseEntity,
   Entity,
-  Column,
   PrimaryGeneratedColumn,
+  Column,
   Unique,
 } from 'typeorm';
 
 @Entity()
-@Unique([])
+@Unique(['id'])
 export class Objective extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  objectiveId: number;
+  id: string;
 
   @Column({ nullable: false, type: 'varchar', length: 120 })
   objective: string;
@@ -18,15 +18,18 @@ export class Objective extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', length: 50 })
   type: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 100 })
-  initialDate: string;
+  @Column({ nullable: false, type: 'varchar', length: 20 })
+  initial_date: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 50 })
-  endDate: string;
+  @Column({ nullable: false, type: 'varchar', length: 20 })
+  end_date: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
   area: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
   unity: string;
+
+  @Column({ nullable: false, type: 'varchar', length: 100 })
+  owner: string;
 }
