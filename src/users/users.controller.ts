@@ -12,12 +12,13 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ValidationPipe } from '@nestjs/common';
 import { ReturnUserDto } from './dto/return-user.dto';
+import { User } from './entities/user.entity';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
+  @Post('user')
   async createUser(
     @Body(ValidationPipe) createUserDto: CreateUserDto,
   ): Promise<ReturnUserDto> {
@@ -26,23 +27,34 @@ export class UsersController {
     return { user, message: 'Úsuario cadastrado com sucesso' };
   }
 
-  @Get()
+  @Get('getAll')
   findAll() {
     return this.usersService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+    return this.usersService.findUserById(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+  async updateUser(
+    @Body(ValidationPipe) updateUserDto: UpdateUserDto,
+    /* @GetUser() user: User, */
+    @Param('id') id: string,
+  ) {
+    /* if (user.role != UserRole.ADMIN && user.id != id)
+      throw new ForbiddenException(
+        'Você não tem autorização para acessar esse recurso',
+      );
+    else {
+    } */
+    return this.usersService.updateUser(updateUserDto, id);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+  async deleteUser(@Param('id') id: string) {
+    await this.usersService.deleteUser(+id);
+    return { message: 'Usuário excluído com sucesso' };
   }
 }
