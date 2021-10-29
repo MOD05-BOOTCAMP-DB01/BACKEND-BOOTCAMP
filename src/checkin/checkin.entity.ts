@@ -7,17 +7,14 @@ import {
 } from 'typeorm';
 
 @Entity()
-@Unique([])
-export class Objective extends BaseEntity {
+@Unique(['id'])
+export class Checkin extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  ChekingId: number;
-
-  @Column({ nullable: false, type: 'varchar', length: 120 })
-  krId: string;
+  id: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
   status: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 100 })
-  Date: string;
+  @Column({ nullable: false, type: 'varchar', length: 20 })
+  date: string;
 }

@@ -7,26 +7,35 @@ import {
 } from 'typeorm';
 
 @Entity()
-@Unique([])
-export class Objective extends BaseEntity {
+@Unique(['id'])
+export class KeyResult extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
-  objectiveId: number;
+  id: string;
 
   @Column({ nullable: false, type: 'varchar', length: 120 })
-  objective: string;
+  key_result: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
   type: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 100 })
-  initialDate: string;
+  @Column({ nullable: false, type: 'varchar', length: 50 })
+  frequency: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
-  endDate: string;
+  owner: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
-  area: string;
+  rating: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 50 })
-  unity: string;
+  @Column({ nullable: true, type: 'varchar', length: 50 })
+  status: string;
+
+  @Column({ nullable: true, type: 'int' })
+  initial_value: number;
+
+  @Column({ nullable: true, type: 'int' })
+  goal_value: number;
+
+  @Column({ nullable: true, type: 'varchar', length: 120 })
+  comment: string;
 }
