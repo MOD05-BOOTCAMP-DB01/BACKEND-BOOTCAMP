@@ -6,7 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { LoggerInterceptor } from 'src/interceptors/logger.interceptor';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { WinstonModule } from 'nest-winston';
-import { winstonConfig } from '../src/configs/winston.config';
+import { winstonConfig } from 'src/configs/winston.config';
 import { ObjectivesModule } from './objectives/objectives.module';
 import { KeyResultsModule } from './key-results/key-results.module';
 import { CheckinModule } from './checkin/checkin.module';
