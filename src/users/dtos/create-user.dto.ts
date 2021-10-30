@@ -29,7 +29,7 @@ export class CreateUserDto {
   })
   password: string;
 
-  @IsNotEmpty({ message: 'Informe uma senha' })
+  @IsNotEmpty({ message: 'Informe a senha de confimação' })
   @MinLength(8, { message: 'A senha deve ter no mínimo 8 caracteres' })
   @MaxLength(32, { message: 'A senha deve ter no máximo 32 caracteres' })
   @IsString({ message: 'Informe uma senha válida' })
