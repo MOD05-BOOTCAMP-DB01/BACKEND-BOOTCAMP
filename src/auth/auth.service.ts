@@ -85,9 +85,9 @@ export class AuthService {
     id: string,
     changePassworDto: ChangePasswordDto,
   ): Promise<void> {
-    const { password, passwordConfirmation } = changePassworDto;
+    const { password, confirmationPassword } = changePassworDto;
 
-    if (password != passwordConfirmation) {
+    if (password != confirmationPassword) {
       throw new UnprocessableEntityException('As senhas não conferem');
     }
 

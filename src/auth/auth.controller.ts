@@ -62,16 +62,16 @@ export class AuthController {
     return { message: 'Senha alterada com sucesso!' };
   }
 
-  @Patch('/:id/change-password')
+  @Patch('/change-password/:id')
   @UseGuards(AuthGuard())
   async changePassword(
     @Param('id') id: string,
     @Body(ValidationPipe) changePasswordDto: ChangePasswordDto,
     @GetUser() user: User,
-  ) {
-    if (user.role != UserRole.ADMIN && user.id.toString() != id)
+  ): Promise<{ message: string }> {
+    if (user.role != UserRole.ADMIN && user.id != id)
       throw new UnauthorizedException(
-        'Você não tem permissão para realizar essa alteração',
+        'Você não tem permissão para realizar essa atividade',
       );
 
     await this.authService.changePassword(id, changePasswordDto);
