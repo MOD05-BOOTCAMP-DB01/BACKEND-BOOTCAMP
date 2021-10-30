@@ -7,6 +7,7 @@ import {
   Patch,
   Param,
   UnauthorizedException,
+  Get,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/users/dtos/create-user.dto';
@@ -36,6 +37,13 @@ export class AuthController {
     @Body(ValidationPipe) credentialsDto: CredentialsDto,
   ): Promise<{ token: string }> {
     return await this.authService.signin(credentialsDto);
+  }
+
+  @Get('/recover-token/:id')
+  async recoverToken(
+    @Param('id') id: string,
+  ): Promise<{ recoverToken: string }> {
+    return await this.authService.recoverToken(id);
   }
 
   @Patch('/reset-password/:token')

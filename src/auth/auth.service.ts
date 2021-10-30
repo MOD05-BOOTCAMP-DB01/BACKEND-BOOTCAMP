@@ -12,6 +12,7 @@ import { CredentialsDto } from '../auth/dtos/credentials.dto';
 import { User } from '../users/user.entity';
 import { UserRole } from 'src/users/user-roles.enum';
 import { JwtService } from '@nestjs/jwt';
+import { randomBytes } from 'crypto';
 import { ChangePasswordDto } from '../auth/dtos/change-password.dto';
 import { UpdateUserDto } from 'src/users/dtos/update-user.dto';
 
@@ -48,17 +49,17 @@ export class AuthService {
     return { token };
   }
 
-  async changePassword(
-    id: string,
-    changePassworDto: ChangePasswordDto,
-  ): Promise<void> {
-    const { password, passwordConfirmation } = changePassworDto;
+  async recoverToken(id: string): Promise<any> {
+    const user = await this.userRepository.findOne({ id });
+    if (!user) throw new NotFoundException('Usuário não encontrado');
+    user.recoverToken = randomBytes(32).toString('hex');
+    await user.save();
 
-    if (password != passwordConfirmation) {
-      throw new UnprocessableEntityException('As senhas não conferem');
-    }
-
-    await this.userRepository.changePassword(id, password);
+    const recover = await this.userRepository.findOne(
+      { id },
+      { select: ['recoverToken'] },
+    );
+    return { recover };
   }
 
   async resetPassword(
@@ -78,6 +79,19 @@ export class AuthService {
     } catch (error) {
       throw error;
     }
+  }
+
+  async changePassword(
+    id: string,
+    changePassworDto: ChangePasswordDto,
+  ): Promise<void> {
+    const { password, passwordConfirmation } = changePassworDto;
+
+    if (password != passwordConfirmation) {
+      throw new UnprocessableEntityException('As senhas não conferem');
+    }
+
+    await this.userRepository.changePassword(id, password);
   }
 
   async updateUser(updateUserDto: UpdateUserDto, id: string): Promise<User> {
