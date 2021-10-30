@@ -50,7 +50,7 @@ export class UsersController {
     };
   }
 
-  @Post('/menager')
+  @Post('/manager')
   @Role(UserRole.ADMIN)
   async createManagerUser(
     @Body(ValidationPipe) createUserDto: CreateUserDto,

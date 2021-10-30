@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   Unique,
+  ManyToOne,
 } from 'typeorm';
+import { User } from 'src/users/user.entity';
 
 @Entity()
 @Unique(['id'])
@@ -30,6 +32,6 @@ export class Objective extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', length: 50 })
   unity: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 100 })
-  owner: string;
+  @ManyToOne(() => User, (user) => user.objectives)
+  owner: User;
 }

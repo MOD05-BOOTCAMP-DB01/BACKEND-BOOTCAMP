@@ -1,6 +1,5 @@
 import {
   Injectable,
-  InternalServerErrorException,
   NotFoundException,
   UnauthorizedException,
   UnprocessableEntityException,
@@ -12,8 +11,8 @@ import { CredentialsDto } from '../auth/dtos/credentials.dto';
 import { User } from '../users/user.entity';
 import { UserRole } from 'src/users/user-roles.enum';
 import { JwtService } from '@nestjs/jwt';
+import { randomBytes } from 'crypto';
 import { ChangePasswordDto } from '../auth/dtos/change-password.dto';
-import { UpdateUserDto } from 'src/users/dtos/update-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -48,17 +47,17 @@ export class AuthService {
     return { token };
   }
 
-  async changePassword(
-    id: string,
-    changePassworDto: ChangePasswordDto,
-  ): Promise<void> {
-    const { password, passwordConfirmation } = changePassworDto;
+  async recoverToken(id: string): Promise<any> {
+    const user = await this.userRepository.findOne({ id });
+    if (!user) throw new NotFoundException('Usuário não encontrado');
+    user.recoverToken = randomBytes(32).toString('hex');
+    await user.save();
 
-    if (password != passwordConfirmation) {
-      throw new UnprocessableEntityException('As senhas não conferem');
-    }
-
-    await this.userRepository.changePassword(id, password);
+    const recover = await this.userRepository.findOne(
+      { id },
+      { select: ['recoverToken'] },
+    );
+    return { recover };
   }
 
   async resetPassword(
@@ -80,18 +79,16 @@ export class AuthService {
     }
   }
 
-  async updateUser(updateUserDto: UpdateUserDto, id: string): Promise<User> {
-    const user = await this.userRepository.findOne(id);
-    const { username } = updateUserDto;
-    user.username = username ? username : user.username;
+  async changePassword(
+    id: string,
+    changePassworDto: ChangePasswordDto,
+  ): Promise<void> {
+    const { password, confirmationPassword } = changePassworDto;
 
-    try {
-      await user.save();
-      return user;
-    } catch (error) {
-      throw new InternalServerErrorException(
-        'Erro ao salvar os dados no banco de dados',
-      );
+    if (password != confirmationPassword) {
+      throw new UnprocessableEntityException('As senhas não conferem');
     }
+
+    await this.userRepository.changePassword(id, password);
   }
 }
