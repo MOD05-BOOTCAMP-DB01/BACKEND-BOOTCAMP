@@ -40,9 +40,16 @@ export class AuthController {
   }
 
   @Get('/recover-token/:id')
+  @UseGuards(AuthGuard())
   async recoverToken(
     @Param('id') id: string,
+    @GetUser() user: User,
   ): Promise<{ recoverToken: string }> {
+    if (user.role != UserRole.ADMIN && user.id != id)
+      throw new UnauthorizedException(
+        'Você não tem permissão para realizar essa atividade',
+      );
+
     return await this.authService.recoverToken(id);
   }
 
