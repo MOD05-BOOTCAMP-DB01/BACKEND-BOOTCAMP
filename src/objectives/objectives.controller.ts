@@ -27,7 +27,7 @@ export class ObjectivesController {
   constructor(private objectivesService: ObjectivesService) {}
 
   @Post()
-  @Role(UserRole.ADMIN)
+  @Role(UserRole.USER)
   async createObjective(
     @Body(ValidationPipe) createObjectiveDto: CreateObjectiveDto,
   ): Promise<ReturnObjectiveDto> {
@@ -36,7 +36,7 @@ export class ObjectivesController {
     );
     return {
       objective,
-      message: 'Jogo cadastrado com sucesso',
+      message: 'Objetivo cadastrado com sucesso',
     };
   }
 
