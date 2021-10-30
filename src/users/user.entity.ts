@@ -23,16 +23,16 @@ export class User extends BaseEntity {
   @Column({ nullable: false })
   password: string;
 
-  @Column({ nullable: true, type: 'varchar', length: 64 })
+  @Column({ nullable: false, type: 'varchar', length: 64 })
   confirmationPassword: string;
 
   @Column({ nullable: true, type: 'varchar', length: 64 })
   recoverToken: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   salt: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 20 })
+  @Column({ nullable: true, type: 'varchar', length: 20 })
   role: string;
 
   @Column({ nullable: false, default: true })
