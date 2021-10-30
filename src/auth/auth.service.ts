@@ -1,6 +1,5 @@
 import {
   Injectable,
-  InternalServerErrorException,
   NotFoundException,
   UnauthorizedException,
   UnprocessableEntityException,
@@ -14,7 +13,6 @@ import { UserRole } from 'src/users/user-roles.enum';
 import { JwtService } from '@nestjs/jwt';
 import { randomBytes } from 'crypto';
 import { ChangePasswordDto } from '../auth/dtos/change-password.dto';
-import { UpdateUserDto } from 'src/users/dtos/update-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -92,20 +90,5 @@ export class AuthService {
     }
 
     await this.userRepository.changePassword(id, password);
-  }
-
-  async updateUser(updateUserDto: UpdateUserDto, id: string): Promise<User> {
-    const user = await this.userRepository.findOne(id);
-    const { username } = updateUserDto;
-    user.username = username ? username : user.username;
-
-    try {
-      await user.save();
-      return user;
-    } catch (error) {
-      throw new InternalServerErrorException(
-        'Erro ao salvar os dados no banco de dados',
-      );
-    }
   }
 }
