@@ -76,7 +76,7 @@ export class KeyResultsService {
     }
   }
 
-  async deleteOeyResult(keyResultId: string) {
+  async deleteKeyResult(keyResultId: string) {
     const result = await this.keyResultRepository.delete({ id: keyResultId });
     if (result.affected === 0) {
       throw new NotFoundException(
