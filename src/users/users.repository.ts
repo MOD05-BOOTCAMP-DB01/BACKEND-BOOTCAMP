@@ -21,10 +21,10 @@ export class UserRepository extends Repository<User> {
     const user = this.create();
     user.email = email;
     user.username = username;
-    user.password = await this.hashPassword(password, user.salt);
     user.role = role;
     user.status = true;
     user.salt = await bcrypt.genSalt();
+    user.password = await this.hashPassword(password, user.salt);
 
     try {
       await user.save();
