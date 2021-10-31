@@ -33,7 +33,7 @@ export class Objective extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', length: 50 })
   unity: string;
 
-  @Column('varchar', { name: 'owner_id' })
+  @Column({ nullable: true, type: 'varchar', name: 'owner_id' })
   ownerID: string;
 
   @JoinColumn({ name: 'owner_id' })
