@@ -27,6 +27,7 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Post()
+  @Role(UserRole.ADMIN)
   async createUser(
     @Body(ValidationPipe) createUserDto: CreateUserDto,
   ): Promise<ReturnUserDto> {

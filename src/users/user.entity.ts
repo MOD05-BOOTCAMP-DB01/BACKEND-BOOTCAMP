@@ -23,9 +23,6 @@ export class User extends BaseEntity {
   @Column({ nullable: false })
   password: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 64 })
-  confirmationPassword: string;
-
   @Column({ nullable: true, type: 'varchar', length: 64 })
   recoverToken: string;
 

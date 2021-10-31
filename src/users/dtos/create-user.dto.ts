@@ -30,9 +30,13 @@ export class CreateUserDto {
   password: string;
 
   @IsNotEmpty({ message: 'Informe a confimação de senha' })
-  @MinLength(8, { message: 'A senha deve ter no mínimo 8 caracteres' })
-  @MaxLength(32, { message: 'A senha deve ter no máximo 32 caracteres' })
-  @IsString({ message: 'Informe uma senha válida' })
+  @MinLength(8, {
+    message: 'A confirmação de senha deve ter no mínimo 8 caracteres',
+  })
+  @MaxLength(32, {
+    message: 'A confirmação de senha deve ter no máximo 32 caracteres',
+  })
+  @IsString({ message: 'Informe a confirmação de senha válida' })
   @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
     message:
       'A confirmação de senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial',
