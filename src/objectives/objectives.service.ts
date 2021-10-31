@@ -19,11 +19,13 @@ export class ObjectivesService {
 
   async createObjective(
     createObjectiveDto: CreateObjectiveDto,
+    ownerID: string,
   ): Promise<Objective> {
-    return this.objectiveRepository.createObjective(
+    return this.objectiveRepository.createObjective({
       createObjectiveDto,
-      UserRole.ADMIN,
-    );
+      role: UserRole.ADMIN,
+      ownerID,
+    });
   }
 
   async findAll(): Promise<Objective[]> {
@@ -45,7 +47,7 @@ export class ObjectivesService {
     id: string,
   ): Promise<Objective> {
     const obj = await this.findOne(id);
-    const { objective, type, initial_date, end_date, unity, area, owner } =
+    const { objective, type, initial_date, end_date, unity, area } =
       updateObjectiveDto;
     obj.objective = objective ? objective : obj.objective;
     obj.type = type ? type : obj.type;
@@ -53,7 +55,6 @@ export class ObjectivesService {
     obj.end_date = end_date ? end_date : obj.end_date;
     obj.unity = unity ? unity : obj.unity;
     obj.area = area ? area : obj.area;
-    obj.owner = owner ? owner : obj.owner;
 
     try {
       await obj.save();

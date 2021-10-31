@@ -9,11 +9,15 @@ import { UserRole } from '../users/user-roles.enum';
 
 @EntityRepository(Objective)
 export class ObjectiveRepository extends Repository<Objective> {
-  async createObjective(
-    createObjectiveDto: CreateObjectiveDto,
-    role: UserRole,
-    ownerID: string,
-  ): Promise<Objective> {
+  async createObjective({
+    createObjectiveDto,
+    role,
+    ownerID,
+  }: {
+    createObjectiveDto: CreateObjectiveDto;
+    role: UserRole;
+    ownerID: string;
+  }): Promise<Objective> {
     const { objective, type, initial_date, end_date, unity, area } =
       createObjectiveDto;
     const obj = this.create();
