@@ -12,8 +12,9 @@ export class ObjectiveRepository extends Repository<Objective> {
   async createObjective(
     createObjectiveDto: CreateObjectiveDto,
     role: UserRole,
+    ownerID: string,
   ): Promise<Objective> {
-    const { objective, type, initial_date, end_date, unity, area, owner } =
+    const { objective, type, initial_date, end_date, unity, area } =
       createObjectiveDto;
     const obj = this.create();
     obj.objective = objective;
@@ -22,7 +23,7 @@ export class ObjectiveRepository extends Repository<Objective> {
     obj.end_date = end_date;
     obj.unity = unity;
     obj.area = area;
-    obj.owner = owner;
+    obj.ownerID = ownerID;
 
     try {
       await obj.save();

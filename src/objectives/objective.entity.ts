@@ -4,7 +4,10 @@ import {
   PrimaryGeneratedColumn,
   Column,
   Unique,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+import { User } from 'src/users/user.entity';
 
 @Entity()
 @Unique(['id'])
@@ -30,6 +33,12 @@ export class Objective extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', length: 50 })
   unity: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 100 })
-  owner: string;
+  @Column('varchar', { name: 'owner_id' })
+  ownerID: string;
+
+  @JoinColumn({ name: 'owner_id' })
+  @ManyToOne(() => User, (owner) => owner.objectives, {
+    eager: true,
+  })
+  owner: User;
 }
