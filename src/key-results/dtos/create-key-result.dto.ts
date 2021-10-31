@@ -1,4 +1,5 @@
 import { IsString, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import { User } from 'src/users/user.entity';
 
 export class CreateKeyResultDto {
   @IsString()
@@ -12,10 +13,6 @@ export class CreateKeyResultDto {
   @IsString()
   @IsNotEmpty({ message: 'Informe a frequência' })
   frequency: string;
-
-  @IsString()
-  @IsNotEmpty({ message: 'Informe um responsável' })
-  owner: string;
 
   @IsString()
   @IsNotEmpty({ message: 'Informe a classificação' })
@@ -36,4 +33,6 @@ export class CreateKeyResultDto {
   @IsString()
   @IsOptional()
   comment: string;
+
+  owner: User;
 }

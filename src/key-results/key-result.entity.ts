@@ -4,7 +4,10 @@ import {
   Column,
   PrimaryGeneratedColumn,
   Unique,
+  JoinColumn,
+  ManyToOne,
 } from 'typeorm';
+import { User } from 'src/users/user.entity';
 
 @Entity()
 @Unique(['id'])
@@ -22,9 +25,6 @@ export class KeyResult extends BaseEntity {
   frequency: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
-  owner: string;
-
-  @Column({ nullable: false, type: 'varchar', length: 50 })
   rating: string;
 
   @Column({ nullable: true, type: 'varchar', length: 50 })
@@ -38,4 +38,10 @@ export class KeyResult extends BaseEntity {
 
   @Column({ nullable: true, type: 'varchar', length: 120 })
   comment: string;
+
+  @JoinColumn({ name: 'owner_id' })
+  @ManyToOne(() => User, (owner) => owner.key_results, {
+    eager: true,
+  })
+  owner: User;
 }

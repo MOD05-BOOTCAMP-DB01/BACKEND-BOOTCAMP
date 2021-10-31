@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Objective } from 'src/objectives/objective.entity';
+import { KeyResult } from 'src/key-results/key-result.entity';
 
 @Entity()
 @Unique(['email'])
@@ -38,6 +39,9 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Objective, (objective) => objective.owner)
   objectives: Objective[];
+
+  @OneToMany(() => KeyResult, (key_results) => key_results.owner)
+  key_results: KeyResult[];
 
   async checkPassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.salt);

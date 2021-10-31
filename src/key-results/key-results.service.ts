@@ -22,7 +22,7 @@ export class KeyResultsService {
   ): Promise<KeyResult> {
     return this.keyResultRepository.createKeyResult(
       createKeyResultDto,
-      UserRole.ADMIN,
+      UserRole.USER,
     );
   }
 
@@ -49,7 +49,6 @@ export class KeyResultsService {
       key_result,
       type,
       frequency,
-      owner,
       rating,
       status,
       initial_value,
@@ -59,7 +58,6 @@ export class KeyResultsService {
     kr.key_result = key_result ? key_result : kr.key_result;
     kr.type = type ? type : kr.type;
     kr.frequency = frequency ? frequency : kr.frequency;
-    kr.owner = owner ? owner : kr.owner;
     kr.rating = rating ? rating : kr.rating;
     kr.status = status ? status : kr.status;
     kr.initial_value = initial_value ? initial_value : kr.initial_value;
