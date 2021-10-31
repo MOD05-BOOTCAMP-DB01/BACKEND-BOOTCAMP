@@ -44,7 +44,9 @@ export class UsersService {
   }
 
   async findAll() {
-    return this.userRepository.find({ relations: ['objectives'] });
+    return this.userRepository.find({
+      relations: ['objectives', 'key_results'],
+    });
   }
 
   async findUsers(
