@@ -19,12 +19,10 @@ export class ObjectivesService {
 
   async createObjective(
     createObjectiveDto: CreateObjectiveDto,
-    ownerID: string,
   ): Promise<Objective> {
     return this.objectiveRepository.createObjective({
       createObjectiveDto,
-      role: UserRole.ADMIN,
-      ownerID,
+      role: UserRole.USER,
     });
   }
 

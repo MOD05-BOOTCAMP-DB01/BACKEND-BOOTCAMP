@@ -1,4 +1,5 @@
 import { IsString, IsNotEmpty } from 'class-validator';
+import { User } from 'src/users/user.entity';
 
 export class CreateObjectiveDto {
   @IsString()
@@ -24,4 +25,6 @@ export class CreateObjectiveDto {
   @IsString()
   @IsNotEmpty({ message: 'Informe uma área' })
   area: string;
+
+  owner: User;
 }

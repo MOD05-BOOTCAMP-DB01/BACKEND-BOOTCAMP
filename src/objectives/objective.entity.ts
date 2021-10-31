@@ -33,9 +33,6 @@ export class Objective extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', length: 50 })
   unity: string;
 
-  @Column({ nullable: true, type: 'varchar', name: 'owner_id' })
-  ownerID: string;
-
   @JoinColumn({ name: 'owner_id' })
   @ManyToOne(() => User, (owner) => owner.objectives, {
     eager: true,

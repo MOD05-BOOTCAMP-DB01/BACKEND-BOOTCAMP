@@ -30,11 +30,9 @@ export class ObjectivesController {
   @Role(UserRole.USER)
   async createObjective(
     @Body(ValidationPipe) createObjectiveDto: CreateObjectiveDto,
-    ownerID: string,
   ): Promise<ReturnObjectiveDto> {
     const objective = await this.objectivesService.createObjective(
       createObjectiveDto,
-      ownerID,
     );
     return {
       objective,
