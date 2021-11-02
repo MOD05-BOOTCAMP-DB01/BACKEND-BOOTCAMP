@@ -27,7 +27,9 @@ export class KeyResultsService {
   }
 
   async findAll(): Promise<KeyResult[]> {
-    return KeyResult.find();
+    return KeyResult.find({
+      relations: ['objectives', 'owner'],
+    });
   }
 
   async findOne(keyResultId: string): Promise<KeyResult> {
