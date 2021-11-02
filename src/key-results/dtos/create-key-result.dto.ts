@@ -1,5 +1,6 @@
 import { IsString, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 import { User } from 'src/users/user.entity';
+import { Objective } from 'src/objectives/objective.entity';
 
 export class CreateKeyResultDto {
   @IsString()
@@ -35,4 +36,6 @@ export class CreateKeyResultDto {
   comment: string;
 
   owner: User;
+
+  objectives: Objective[];
 }

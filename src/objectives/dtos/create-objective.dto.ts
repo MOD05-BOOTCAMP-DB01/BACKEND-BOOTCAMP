@@ -1,5 +1,6 @@
 import { IsString, IsNotEmpty } from 'class-validator';
 import { User } from 'src/users/user.entity';
+import { KeyResult } from 'src/key-results/key-result.entity';
 
 export class CreateObjectiveDto {
   @IsString()
@@ -27,4 +28,6 @@ export class CreateObjectiveDto {
   area: string;
 
   owner: User;
+
+  key_results: KeyResult;
 }
