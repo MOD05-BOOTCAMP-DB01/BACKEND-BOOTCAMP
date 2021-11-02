@@ -5,7 +5,12 @@ import { winstonConfig } from './configs/winston.config';
 
 async function bootstrap() {
   const logger = WinstonModule.createLogger(winstonConfig);
-  const app = await NestFactory.create(AppModule, { logger });
+  const app = await NestFactory.create(AppModule, {
+    logger,
+    cors: {
+      origin: ['http://localhost:3001/'],
+    },
+  });
   await app.listen(3000);
 }
 bootstrap();
