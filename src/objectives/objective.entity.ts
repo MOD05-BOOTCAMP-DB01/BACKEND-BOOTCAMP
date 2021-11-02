@@ -8,6 +8,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { User } from 'src/users/user.entity';
+import { KeyResult } from 'src/key-results/key-result.entity';
 
 @Entity()
 @Unique(['id'])
@@ -38,4 +39,10 @@ export class Objective extends BaseEntity {
     eager: true,
   })
   owner: User;
+
+  @JoinColumn({ name: 'key_result_id' })
+  @ManyToOne(() => KeyResult, (key_results) => key_results.objectives, {
+    eager: true,
+  })
+  key_results: KeyResult;
 }
