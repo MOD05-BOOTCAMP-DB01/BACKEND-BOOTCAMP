@@ -16,8 +16,16 @@ export class ObjectiveRepository extends Repository<Objective> {
     createObjectiveDto: CreateObjectiveDto;
     role: UserRole;
   }): Promise<Objective> {
-    const { objective, type, initial_date, end_date, unity, area, owner } =
-      createObjectiveDto;
+    const {
+      objective,
+      type,
+      initial_date,
+      end_date,
+      unity,
+      area,
+      owner,
+      key_results,
+    } = createObjectiveDto;
     const obj = this.create();
     obj.objective = objective;
     obj.type = type;
@@ -26,6 +34,7 @@ export class ObjectiveRepository extends Repository<Objective> {
     obj.unity = unity;
     obj.area = area;
     obj.owner = owner;
+    obj.key_results = key_results;
 
     try {
       await obj.save();
