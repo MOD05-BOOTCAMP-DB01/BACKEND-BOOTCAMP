@@ -42,6 +42,14 @@ export class UserRepository extends Repository<User> {
     }
   }
 
+  async findObjectiveByUser(id: string): Promise<any> {
+    const query = this.createQueryBuilder('user');
+    query.where('user.id = :id', { id });
+    query.innerJoinAndSelect('user.objectives', 'objectives');
+    query.select(['user.id', 'objectives']);
+    return await query.getOne();
+  }
+
   async findUsers(
     queryDto: FindUsersQueryDto,
   ): Promise<{ users: User[]; total: number }> {
