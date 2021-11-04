@@ -40,7 +40,7 @@ export class UsersController {
   }
 
   @Post('/adm')
-  @Role(UserRole.ADMIN)
+  @Role(UserRole.USER)
   async createAdminUser(
     @Body(ValidationPipe) createUserDto: CreateUserDto,
   ): Promise<ReturnUserDto> {

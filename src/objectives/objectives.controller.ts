@@ -22,12 +22,12 @@ import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/users/user.entity';
 
 @Controller('objectives')
-@UseGuards(AuthGuard(), RolesGuard)
+//@UseGuards(AuthGuard(), RolesGuard)
 export class ObjectivesController {
   constructor(private objectivesService: ObjectivesService) {}
 
   @Post()
-  @Role(UserRole.USER)
+  //@Role(UserRole.USER)
   async createObjective(
     @Body(ValidationPipe) createObjectiveDto: CreateObjectiveDto,
   ): Promise<ReturnObjectiveDto> {
@@ -46,7 +46,7 @@ export class ObjectivesController {
   }
 
   @Get('/:id')
-  @Role(UserRole.ADMIN)
+  //@Role(UserRole.ADMIN)
   async findOne(@Param('id') id: string): Promise<ReturnObjectiveDto> {
     const objective = await this.objectivesService.findOne(id);
     return {
@@ -71,7 +71,7 @@ export class ObjectivesController {
   }
 
   @Delete('/:id')
-  @Role(UserRole.ADMIN)
+  //@Role(UserRole.ADMIN)
   async deleteObjective(@Param('id') id: string) {
     await this.objectivesService.deleteObjective(id);
     return { message: 'Objetivo excluído com sucesso' };

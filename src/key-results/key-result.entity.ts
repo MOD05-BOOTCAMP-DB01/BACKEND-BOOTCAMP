@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { User } from 'src/users/user.entity';
 import { Objective } from 'src/objectives/objective.entity';
+import { Checkin } from 'src/checkin/checkin.entity';
 
 @Entity()
 @Unique(['id'])
@@ -49,4 +50,8 @@ export class KeyResult extends BaseEntity {
 
   @OneToMany(() => Objective, (objective) => objective.key_results)
   objectives: Objective[];
+
+  @OneToMany(() => Checkin, (checkin) => checkin.key_results)
+  checkin: Checkin[];
 }
+

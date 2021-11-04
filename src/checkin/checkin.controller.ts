@@ -22,12 +22,12 @@ import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/users/user.entity';
 
 @Controller('checkin')
-@UseGuards(AuthGuard(), RolesGuard)
+//@UseGuards(AuthGuard(), RolesGuard)
 export class CheckinController {
   constructor(private checkinService: CheckinService) {}
 
   @Post()
-  @Role(UserRole.ADMIN)
+  //@Role(UserRole.ADMIN)
   async createCheckin(
     @Body(ValidationPipe) createCheckinDto: CreateCheckinDto,
   ): Promise<ReturnCheckinDto> {
@@ -44,7 +44,7 @@ export class CheckinController {
   }
 
   @Get('/:id')
-  @Role(UserRole.ADMIN)
+  //@Role(UserRole.ADMIN)
   async findOne(@Param('id') id: string): Promise<ReturnCheckinDto> {
     const checkin = await this.checkinService.findOne(id);
     return {
@@ -69,7 +69,7 @@ export class CheckinController {
   }
 
   @Delete('/:id')
-  @Role(UserRole.ADMIN)
+  //@Role(UserRole.ADMIN)
   async deleteCheckin(@Param('id') id: string) {
     await this.checkinService.deleteCheckin(id);
     return { message: 'Checkin excluído com sucesso' };
