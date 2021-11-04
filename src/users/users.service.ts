@@ -49,6 +49,15 @@ export class UsersService {
     });
   }
 
+  async findObjectiveByUser(userId: string): Promise<User[]> {
+    const objectives = await this.userRepository.findObjectiveByUser(userId);
+
+    if (!objectives)
+      throw new NotFoundException('Usuário não possui objetivos');
+
+    return objectives;
+  }
+
   async findUsers(
     queryDto: FindUsersQueryDto,
   ): Promise<{ users: User[]; total: number }> {

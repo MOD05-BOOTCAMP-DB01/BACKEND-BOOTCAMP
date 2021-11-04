@@ -68,6 +68,11 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @Get('/objectives/:id')
+  async findObjectiveByUser(@Param('id') id: string) {
+    return await this.usersService.findObjectiveByUser(id);
+  }
+
   @Get('/:id')
   @Role(UserRole.ADMIN)
   async findOne(@Param('id') id: string): Promise<ReturnUserDto> {
