@@ -8,4 +8,8 @@ export class UpdateCheckinDto {
   @IsString()
   @IsOptional()
   date: string;
+
+  @IsString()
+  @IsOptional()
+  valorAtual: string;
 }

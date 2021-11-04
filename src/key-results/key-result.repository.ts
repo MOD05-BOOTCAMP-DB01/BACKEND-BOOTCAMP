@@ -13,7 +13,7 @@ export class KeyResultRepository extends Repository<KeyResult> {
     createKeyResultDto: CreateKeyResultDto,
     role: UserRole,
   ): Promise<KeyResult> {
-    const { key_result, type, frequency, rating, owner, objectives } =
+    const { key_result, type, frequency, rating, owner, objectives, checkin } =
       createKeyResultDto;
     const kr = this.create();
     kr.key_result = key_result;
@@ -22,6 +22,7 @@ export class KeyResultRepository extends Repository<KeyResult> {
     kr.rating = rating;
     kr.owner = owner;
     kr.objectives = objectives;
+    kr.checkin = checkin;
 
     try {
       await kr.save();

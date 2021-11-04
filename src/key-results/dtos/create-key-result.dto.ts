@@ -1,6 +1,7 @@
 import { IsString, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 import { User } from 'src/users/user.entity';
 import { Objective } from 'src/objectives/objective.entity';
+import { Checkin } from 'src/checkin/checkin.entity';
 
 export class CreateKeyResultDto {
   @IsString()
@@ -18,6 +19,8 @@ export class CreateKeyResultDto {
   @IsString()
   @IsNotEmpty({ message: 'Informe a classificação' })
   rating: string;
+
+  concluido: boolean;
 
   @IsString()
   @IsOptional()
@@ -38,4 +41,6 @@ export class CreateKeyResultDto {
   owner: User;
 
   objectives: Objective[];
+
+  checkin: Checkin[];
 }

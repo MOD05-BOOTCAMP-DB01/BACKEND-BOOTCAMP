@@ -1,4 +1,5 @@
 import { IsString, IsNumber, IsOptional } from 'class-validator';
+import { Checkin } from 'src/checkin/checkin.entity';
 
 export class UpdateKeyResultDto {
   @IsString()
@@ -36,4 +37,10 @@ export class UpdateKeyResultDto {
   @IsString()
   @IsOptional()
   comment: string;
+
+  @IsOptional()
+  concluido: boolean;
+
+  @IsOptional()
+  checkin: Checkin[];
 }

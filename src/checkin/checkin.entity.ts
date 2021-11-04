@@ -5,7 +5,6 @@ import {
   PrimaryGeneratedColumn,
   Unique,
   JoinColumn,
-  ManyToOne,
   OneToOne,
 } from 'typeorm';
 import { KeyResult } from 'src/key-results/key-result.entity';
@@ -16,11 +15,11 @@ export class Checkin extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 50 })
-  status: string;
-
   @Column({ nullable: false, type: 'varchar', length: 20 })
   date: string;
+
+  @Column({ nullable: false, type: 'varchar', length: 20 })
+  valorAtual: string;
 
   @JoinColumn({ name: 'key_result_id' })
   @OneToOne(() => KeyResult, (key_results) => key_results.checkin, {

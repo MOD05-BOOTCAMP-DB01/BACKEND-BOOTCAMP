@@ -28,13 +28,13 @@ export class KeyResultsService {
 
   async findAll(): Promise<KeyResult[]> {
     return KeyResult.find({
-      relations: ['objectives', 'owner'],
+      relations: ['checkin', 'objectives', 'owner'],
     });
   }
 
   async findOne(keyResultId: string): Promise<KeyResult> {
     const kr = await this.keyResultRepository.findOne(keyResultId, {
-      select: ['key_result', 'type', 'frequency', 'id'],
+      select: ['checkin', 'concluido', 'key_result', 'type', 'frequency', 'id'],
     });
 
     if (!kr) throw new NotFoundException('Resultado-chave não encontrado');
@@ -56,6 +56,8 @@ export class KeyResultsService {
       initial_value,
       goal_value,
       comment,
+      concluido,
+      checkin,
     } = updateKeyResultDto;
     kr.key_result = key_result ? key_result : kr.key_result;
     kr.type = type ? type : kr.type;
@@ -65,6 +67,9 @@ export class KeyResultsService {
     kr.initial_value = initial_value ? initial_value : kr.initial_value;
     kr.goal_value = goal_value ? goal_value : kr.goal_value;
     kr.comment = comment ? comment : kr.comment;
+    kr.concluido = concluido ? concluido : kr.concluido;
+    kr.checkin = checkin ? checkin : kr.checkin;
+   
 
     try {
       await kr.save();

@@ -7,6 +7,7 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
+  OneToOne,
 } from 'typeorm';
 import { User } from 'src/users/user.entity';
 import { Objective } from 'src/objectives/objective.entity';
@@ -42,6 +43,9 @@ export class KeyResult extends BaseEntity {
   @Column({ nullable: true, type: 'varchar', length: 120 })
   comment: string;
 
+  @Column({ nullable: true, type: 'boolean'})
+  concluido: boolean;
+
   @JoinColumn({ name: 'owner_id' })
   @ManyToOne(() => User, (owner) => owner.key_results, {
     eager: true,
@@ -51,7 +55,7 @@ export class KeyResult extends BaseEntity {
   @OneToMany(() => Objective, (objective) => objective.key_results)
   objectives: Objective[];
 
-  @OneToMany(() => Checkin, (checkin) => checkin.key_results)
+  @OneToOne(() => Checkin, (checkin) => checkin.key_results)
   checkin: Checkin[];
 }
 

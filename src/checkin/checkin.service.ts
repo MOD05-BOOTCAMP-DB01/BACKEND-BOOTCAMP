@@ -17,20 +17,23 @@ export class CheckinService {
     private checkinRepository: CheckinRepository,
   ) {}
 
-  async createCheckin(createCheckinDto: CreateCheckinDto): Promise<Checkin> {
+  async createCheckin(createCheckinDto: CreateCheckinDto,
+    ): Promise<Checkin> {
     return this.checkinRepository.createCheckin(
       createCheckinDto,
-      UserRole.ADMIN,
+      UserRole.USER,
     );
   }
 
   async findAll(): Promise<Checkin[]> {
-    return Checkin.find();
+    return Checkin.find({
+      relations: ['key_results'],
+    });
   }
 
   async findOne(checkinId: string): Promise<Checkin> {
     const check = await this.checkinRepository.findOne(checkinId, {
-      select: ['status', 'date', 'id'],
+      select: ['valorAtual', 'date', 'id'],
     });
 
     if (!check) throw new NotFoundException('Checkin não encontrado');
@@ -43,8 +46,8 @@ export class CheckinService {
     id: string,
   ): Promise<Checkin> {
     const check = await this.findOne(id);
-    const { status, date } = updateCheckinDto;
-    check.status = status ? status : check.status;
+    const { valorAtual, date } = updateCheckinDto;
+    check.valorAtual = valorAtual ? valorAtual : check.valorAtual;
     check.date = date ? date : check.date;
 
     try {
