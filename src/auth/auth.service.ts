@@ -40,11 +40,13 @@ export class AuthService {
       throw new UnauthorizedException('Credenciais inválidas');
     }
 
+    const userId = user.id;
+
     const jwtPayload = {
       id: user.id,
     };
     const token = await this.jwtService.sign(jwtPayload);
-    return { token };
+    return { token, userId };
   }
 
   async recoverToken(id: string): Promise<any> {
