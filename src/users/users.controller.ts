@@ -40,7 +40,7 @@ export class UsersController {
   }
 
   @Post('/adm')
-  @Role(UserRole.USER)
+  @Role(UserRole.ADMIN)
   async createAdminUser(
     @Body(ValidationPipe) createUserDto: CreateUserDto,
   ): Promise<ReturnUserDto> {
@@ -71,6 +71,11 @@ export class UsersController {
   @Get('/objectives/:id')
   async findObjectiveByUser(@Param('id') id: string) {
     return await this.usersService.findObjectiveByUser(id);
+  }
+
+  @Get('/key_results/:id')
+  async findKeyResultByUser(@Param('id') id: string) {
+    return await this.usersService.findKeyResultByUser(id);
   }
 
   @Get('/:id')

@@ -22,19 +22,19 @@ import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/users/user.entity';
 
 @Controller('checkin')
-//@UseGuards(AuthGuard(), RolesGuard)
+@UseGuards(AuthGuard(), RolesGuard)
 export class CheckinController {
   constructor(private checkinService: CheckinService) {}
 
   @Post()
-  //@Role(UserRole.ADMIN)
+  @Role(UserRole.MANAGER)
   async createCheckin(
     @Body(ValidationPipe) createCheckinDto: CreateCheckinDto,
   ): Promise<ReturnCheckinDto> {
     const checkin = await this.checkinService.createCheckin(createCheckinDto);
     return {
       checkin,
-      message: 'Checkin cadastrado com sucesso',
+      message: 'Check-in cadastrado com sucesso',
     };
   }
 
@@ -44,12 +44,11 @@ export class CheckinController {
   }
 
   @Get('/:id')
-  //@Role(UserRole.ADMIN)
   async findOne(@Param('id') id: string): Promise<ReturnCheckinDto> {
     const checkin = await this.checkinService.findOne(id);
     return {
       checkin,
-      message: 'Checkin encontrado',
+      message: 'Check-in encontrado',
     };
   }
 
@@ -59,7 +58,7 @@ export class CheckinController {
     @GetUser() user: User,
     @Param('id') id: string,
   ) {
-    if (user.role != UserRole.ADMIN)
+    if (user.role != UserRole.MANAGER)
       throw new ForbiddenException(
         'Você não tem autorização para acessar esse recurso',
       );
@@ -69,9 +68,9 @@ export class CheckinController {
   }
 
   @Delete('/:id')
-  //@Role(UserRole.ADMIN)
+  @Role(UserRole.MANAGER)
   async deleteCheckin(@Param('id') id: string) {
     await this.checkinService.deleteCheckin(id);
-    return { message: 'Checkin excluído com sucesso' };
+    return { message: 'Check-in excluído com sucesso' };
   }
 }

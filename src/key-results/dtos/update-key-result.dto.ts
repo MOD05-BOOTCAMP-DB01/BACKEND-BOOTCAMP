@@ -1,5 +1,4 @@
-import { IsString, IsNumber, IsOptional } from 'class-validator';
-import { Checkin } from 'src/checkin/checkin.entity';
+import { IsString, IsNumber, IsOptional, IsBoolean } from 'class-validator';
 
 export class UpdateKeyResultDto {
   @IsString()
@@ -16,15 +15,7 @@ export class UpdateKeyResultDto {
 
   @IsString()
   @IsOptional()
-  owner: string;
-
-  @IsString()
-  @IsOptional()
   rating: string;
-
-  @IsString()
-  @IsOptional()
-  status: string;
 
   @IsNumber()
   @IsOptional()
@@ -34,13 +25,15 @@ export class UpdateKeyResultDto {
   @IsOptional()
   goal_value: number;
 
+  @IsNumber()
+  @IsOptional()
+  status: number;
+
   @IsString()
   @IsOptional()
   comment: string;
 
+  @IsBoolean()
   @IsOptional()
-  concluido: boolean;
-
-  @IsOptional()
-  checkin: Checkin[];
+  done: boolean;
 }

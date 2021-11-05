@@ -17,26 +17,25 @@ export class CheckinService {
     private checkinRepository: CheckinRepository,
   ) {}
 
-  async createCheckin(createCheckinDto: CreateCheckinDto,
-    ): Promise<Checkin> {
+  async createCheckin(createCheckinDto: CreateCheckinDto): Promise<Checkin> {
     return this.checkinRepository.createCheckin(
       createCheckinDto,
-      UserRole.USER,
+      UserRole.MANAGER,
     );
   }
 
-  async findAll(): Promise<Checkin[]> {
-    return Checkin.find({
+  async findAll() {
+    return this.checkinRepository.find({
       relations: ['key_results'],
     });
   }
 
   async findOne(checkinId: string): Promise<Checkin> {
     const check = await this.checkinRepository.findOne(checkinId, {
-      select: ['valorAtual', 'date', 'id'],
+      select: ['current_value', 'date', 'id'],
     });
 
-    if (!check) throw new NotFoundException('Checkin não encontrado');
+    if (!check) throw new NotFoundException('Check-in não encontrado');
 
     return check;
   }
@@ -46,8 +45,8 @@ export class CheckinService {
     id: string,
   ): Promise<Checkin> {
     const check = await this.findOne(id);
-    const { valorAtual, date } = updateCheckinDto;
-    check.valorAtual = valorAtual ? valorAtual : check.valorAtual;
+    const { date, current_value } = updateCheckinDto;
+    check.current_value = current_value ? current_value : check.current_value;
     check.date = date ? date : check.date;
 
     try {
@@ -64,7 +63,7 @@ export class CheckinService {
     const result = await this.checkinRepository.delete({ id: checkinId });
     if (result.affected === 0) {
       throw new NotFoundException(
-        'Não foi encontrado um checkin com o ID informado',
+        'Não foi encontrado um check-in com o ID informado',
       );
     }
   }

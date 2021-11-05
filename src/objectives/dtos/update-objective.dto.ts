@@ -18,7 +18,4 @@ export class UpdateObjectiveDto {
 
   @IsOptional()
   area: string;
-
-  @IsOptional()
-  owner: string;
 }

@@ -13,19 +13,18 @@ export class CheckinRepository extends Repository<Checkin> {
     createCheckinDto: CreateCheckinDto,
     role: UserRole,
   ): Promise<Checkin> {
-    const { key_results, valorAtual, date } = createCheckinDto;
+    const { date, current_value, key_result } = createCheckinDto;
     const check = this.create();
-    check.valorAtual = valorAtual;
     check.date = date;
-    check.key_results = key_results;
-    
+    check.current_value = current_value;
+    check.key_result = key_result;
 
     try {
       await check.save();
       return check;
     } catch (error) {
       if (error.code.toString() === '23505') {
-        throw new ConflictException('Checkin já cadastrado!');
+        throw new ConflictException('Check-in já cadastrado!');
       } else {
         throw new InternalServerErrorException(
           'Erro ao salvar o checkin no banco de dados',

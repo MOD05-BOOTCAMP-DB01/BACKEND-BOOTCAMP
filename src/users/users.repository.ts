@@ -50,6 +50,14 @@ export class UserRepository extends Repository<User> {
     return await query.getOne();
   }
 
+  async findKeyResultByUser(id: string): Promise<any> {
+    const query = this.createQueryBuilder('user');
+    query.where('user.id = :id', { id });
+    query.innerJoinAndSelect('user.key_results', 'key_results');
+    query.select(['user.id', 'key_results']);
+    return await query.getOne();
+  }
+
   async findUsers(
     queryDto: FindUsersQueryDto,
   ): Promise<{ users: User[]; total: number }> {

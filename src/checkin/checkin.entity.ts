@@ -18,14 +18,12 @@ export class Checkin extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', length: 20 })
   date: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 20 })
-  valorAtual: string;
+  @Column({ nullable: false, type: 'int' })
+  current_value: number;
 
   @JoinColumn({ name: 'key_result_id' })
-  @OneToOne(() => KeyResult, (key_results) => key_results.checkin, {
+  @OneToOne(() => KeyResult, (key_result) => key_result.checkin, {
     eager: true,
   })
-  key_results: KeyResult;
+  key_result: KeyResult;
 }
-
-  

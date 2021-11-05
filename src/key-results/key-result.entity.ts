@@ -31,20 +31,20 @@ export class KeyResult extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', length: 50 })
   rating: string;
 
-  @Column({ nullable: true, type: 'varchar', length: 50 })
-  status: string;
-
   @Column({ nullable: true, type: 'int' })
   initial_value: number;
 
   @Column({ nullable: true, type: 'int' })
   goal_value: number;
 
+  @Column({ nullable: true, type: 'int' })
+  status: number;
+
   @Column({ nullable: true, type: 'varchar', length: 120 })
   comment: string;
 
-  @Column({ nullable: true, type: 'boolean'})
-  concluido: boolean;
+  @Column({ nullable: true, type: 'boolean' })
+  done: boolean;
 
   @JoinColumn({ name: 'owner_id' })
   @ManyToOne(() => User, (owner) => owner.key_results, {
@@ -55,7 +55,6 @@ export class KeyResult extends BaseEntity {
   @OneToMany(() => Objective, (objective) => objective.key_results)
   objectives: Objective[];
 
-  @OneToOne(() => Checkin, (checkin) => checkin.key_results)
+  @OneToOne(() => Checkin, (checkin) => checkin.key_result)
   checkin: Checkin[];
 }
-

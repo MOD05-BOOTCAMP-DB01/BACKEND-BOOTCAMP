@@ -34,7 +34,7 @@ export class KeyResultsService {
 
   async findOne(keyResultId: string): Promise<KeyResult> {
     const kr = await this.keyResultRepository.findOne(keyResultId, {
-      select: ['checkin', 'concluido', 'key_result', 'type', 'frequency', 'id'],
+      select: ['key_result', 'type', 'frequency', 'id'],
     });
 
     if (!kr) throw new NotFoundException('Resultado-chave não encontrado');
@@ -52,24 +52,21 @@ export class KeyResultsService {
       type,
       frequency,
       rating,
-      status,
       initial_value,
       goal_value,
+      status,
       comment,
-      concluido,
-      checkin,
+      done,
     } = updateKeyResultDto;
     kr.key_result = key_result ? key_result : kr.key_result;
     kr.type = type ? type : kr.type;
     kr.frequency = frequency ? frequency : kr.frequency;
     kr.rating = rating ? rating : kr.rating;
-    kr.status = status ? status : kr.status;
     kr.initial_value = initial_value ? initial_value : kr.initial_value;
     kr.goal_value = goal_value ? goal_value : kr.goal_value;
+    kr.status = status ? status : kr.status;
     kr.comment = comment ? comment : kr.comment;
-    kr.concluido = concluido ? concluido : kr.concluido;
-    kr.checkin = checkin ? checkin : kr.checkin;
-   
+    kr.done = done ? done : kr.done;
 
     try {
       await kr.save();

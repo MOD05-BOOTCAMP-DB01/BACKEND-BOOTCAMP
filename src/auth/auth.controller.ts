@@ -40,7 +40,6 @@ export class AuthController {
   }
 
   @Get('/recover-token/:id')
-  @UseGuards(AuthGuard())
   async recoverToken(
     @Param('id') id: string,
     @GetUser() user: User,

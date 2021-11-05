@@ -1,15 +1,11 @@
-import { IsString, IsOptional } from 'class-validator';
+import { IsString, IsNumber, IsOptional } from 'class-validator';
 
 export class UpdateCheckinDto {
   @IsString()
   @IsOptional()
-  status: string;
-
-  @IsString()
-  @IsOptional()
   date: string;
 
-  @IsString()
+  @IsNumber()
   @IsOptional()
-  valorAtual: string;
+  current_value: number;
 }

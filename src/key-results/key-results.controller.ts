@@ -22,12 +22,12 @@ import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/users/user.entity';
 
 @Controller('key-results')
-//@UseGuards(AuthGuard(), RolesGuard)
+@UseGuards(AuthGuard(), RolesGuard)
 export class KeyResultsController {
   constructor(private keyResultsService: KeyResultsService) {}
 
   @Post()
-  //@Role(UserRole.USER)
+  @Role(UserRole.USER)
   async createKeyResult(
     @Body(ValidationPipe) createKeyResultDto: CreateKeyResultDto,
   ): Promise<ReturnKeyResultDto> {
@@ -46,7 +46,7 @@ export class KeyResultsController {
   }
 
   @Get('/:id')
-  //@Role(UserRole.ADMIN)
+  @Role(UserRole.USER)
   async findOne(@Param('id') id: string): Promise<ReturnKeyResultDto> {
     const keyResult = await this.keyResultsService.findOne(id);
     return {
@@ -61,7 +61,7 @@ export class KeyResultsController {
     @GetUser() user: User,
     @Param('id') id: string,
   ) {
-    if (user.role != UserRole.ADMIN)
+    if (user.role != UserRole.USER)
       throw new ForbiddenException(
         'Você não tem autorização para acessar esse recurso',
       );
@@ -71,7 +71,7 @@ export class KeyResultsController {
   }
 
   @Delete('/:id')
-  //@Role(UserRole.ADMIN)
+  @Role(UserRole.USER)
   async deleteKeyResult(@Param('id') id: string) {
     await this.keyResultsService.deleteKeyResult(id);
     return { message: 'Resultado-chave excluído com sucesso' };

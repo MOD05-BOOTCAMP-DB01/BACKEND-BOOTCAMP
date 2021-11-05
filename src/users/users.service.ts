@@ -58,6 +58,15 @@ export class UsersService {
     return objectives;
   }
 
+  async findKeyResultByUser(userId: string): Promise<User[]> {
+    const keyResults = await this.userRepository.findKeyResultByUser(userId);
+
+    if (!keyResults)
+      throw new NotFoundException('Usuário não possui resultados-chave');
+
+    return keyResults;
+  }
+
   async findUsers(
     queryDto: FindUsersQueryDto,
   ): Promise<{ users: User[]; total: number }> {
