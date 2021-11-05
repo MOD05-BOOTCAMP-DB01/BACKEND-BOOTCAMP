@@ -26,8 +26,10 @@ export class ObjectivesService {
     });
   }
 
-  async findAll(): Promise<Objective[]> {
-    return Objective.find();
+  async findAll() {
+    return this.objectiveRepository.find({
+      relations: ['objective_related'],
+    });
   }
 
   async findOne(objectiveId: string): Promise<Objective> {

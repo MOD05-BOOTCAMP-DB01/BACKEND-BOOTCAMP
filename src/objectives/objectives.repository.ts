@@ -25,6 +25,7 @@ export class ObjectiveRepository extends Repository<Objective> {
       area,
       owner,
       key_results,
+      objective_related,
     } = createObjectiveDto;
     const obj = this.create();
     obj.objective = objective;
@@ -35,6 +36,7 @@ export class ObjectiveRepository extends Repository<Objective> {
     obj.area = area;
     obj.owner = owner;
     obj.key_results = key_results;
+    obj.objective_related = objective_related;
 
     try {
       await obj.save();
