@@ -42,6 +42,7 @@ export class Objective extends BaseEntity {
   })
   owner: User;
 
+  @JoinColumn({ name: 'key_result_id' })
   @OneToMany(() => KeyResult, (key_results) => key_results.objective)
   key_results: KeyResult[];
 
@@ -49,9 +50,6 @@ export class Objective extends BaseEntity {
   @ManyToMany(
     () => Objective,
     (objective_related) => objective_related.objective,
-    {
-      eager: true,
-    },
   )
   objective_related: Objective;
 }

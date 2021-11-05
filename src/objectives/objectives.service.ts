@@ -27,12 +27,12 @@ export class ObjectivesService {
     });
   }
 
-  async findAll() {
-    return await this.objectiveRepository.find();
+  async findAll(): Promise<Objective[]> {
+    return Objective.find();
   }
 
-  async findKeyResult(keyResultId: string): Promise<KeyResult[]> {
-    const keyResult = await this.objectiveRepository.findKeyResult(keyResultId);
+  async findKeyResult(objectiveId: string): Promise<KeyResult[]> {
+    const keyResult = await this.objectiveRepository.findKeyResult(objectiveId);
 
     if (!keyResult)
       throw new NotFoundException('Resultado-chave não encontrado');

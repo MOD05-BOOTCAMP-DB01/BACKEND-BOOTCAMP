@@ -45,7 +45,7 @@ export class ObjectivesController {
     return this.objectivesService.findAll();
   }
 
-  @Get('/key_results/:id')
+  @Get('/:id/key_results')
   async findKeyResult(@Param('id') id: string) {
     return await this.objectivesService.findKeyResult(id);
   }

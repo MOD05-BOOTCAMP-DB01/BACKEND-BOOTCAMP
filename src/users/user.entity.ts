@@ -37,7 +37,7 @@ export class User extends BaseEntity {
   @Column({ nullable: false, default: true })
   status: boolean;
 
-  @OneToMany(() => Objective, (objective) => objective.owner)
+  @OneToMany(() => Objective, (objectives) => objectives.owner)
   objectives: Objective[];
 
   @OneToMany(() => KeyResult, (key_results) => key_results.owner)

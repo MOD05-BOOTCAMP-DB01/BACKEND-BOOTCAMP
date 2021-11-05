@@ -52,7 +52,6 @@ export class KeyResult extends BaseEntity {
   })
   owner: User;
 
-  @JoinColumn({ name: 'objective_id' })
   @ManyToOne(() => Objective, (objective) => objective.key_results)
   objective: Objective;
 

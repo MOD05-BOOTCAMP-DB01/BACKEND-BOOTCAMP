@@ -27,7 +27,9 @@ export class KeyResultsService {
   }
 
   async findAll() {
-    return await this.keyResultRepository.find();
+    return await this.keyResultRepository.find({
+      relations: ['objective'],
+    });
   }
 
   async findOne(keyResultId: string): Promise<KeyResult> {
