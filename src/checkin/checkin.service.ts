@@ -26,7 +26,7 @@ export class CheckinService {
 
   async findAll() {
     return this.checkinRepository.find({
-      relations: ['key_results'],
+      relations: ['key_result'],
     });
   }
 
