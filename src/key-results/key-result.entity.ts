@@ -31,13 +31,13 @@ export class KeyResult extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', length: 50 })
   rating: string;
 
-  @Column({ nullable: true, type: 'int' })
+  @Column({ nullable: true, type: 'float' })
   initial_value: number;
 
-  @Column({ nullable: true, type: 'int' })
+  @Column({ nullable: true, type: 'float' })
   goal_value: number;
 
-  @Column({ nullable: true, type: 'int' })
+  @Column({ nullable: true, type: 'float' })
   status: number;
 
   @Column({ nullable: true, type: 'varchar', length: 120 })

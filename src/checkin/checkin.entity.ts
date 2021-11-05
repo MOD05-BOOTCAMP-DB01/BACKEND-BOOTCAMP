@@ -18,7 +18,7 @@ export class Checkin extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', length: 20 })
   date: string;
 
-  @Column({ nullable: false, type: 'int' })
+  @Column({ nullable: false, type: 'float' })
   current_value: number;
 
   @JoinColumn({ name: 'key_result_id' })
