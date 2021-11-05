@@ -53,5 +53,5 @@ export class Objective extends BaseEntity {
       eager: true,
     },
   )
-  objective_related: Objective[];
+  objective_related: Objective;
 }
