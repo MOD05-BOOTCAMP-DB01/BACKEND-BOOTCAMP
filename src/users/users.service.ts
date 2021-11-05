@@ -44,9 +44,7 @@ export class UsersService {
   }
 
   async findAll() {
-    return this.userRepository.find({
-      relations: ['objectives', 'key_results'],
-    });
+    return await this.userRepository.find();
   }
 
   async findObjectiveByUser(userId: string): Promise<User[]> {

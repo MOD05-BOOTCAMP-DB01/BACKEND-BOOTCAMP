@@ -45,6 +45,11 @@ export class ObjectivesController {
     return this.objectivesService.findAll();
   }
 
+  @Get('/key_results/:id')
+  async findKeyResult(@Param('id') id: string) {
+    return await this.objectivesService.findKeyResult(id);
+  }
+
   @Get('/:id')
   @Role(UserRole.MANAGER)
   async findOne(@Param('id') id: string): Promise<ReturnObjectiveDto> {

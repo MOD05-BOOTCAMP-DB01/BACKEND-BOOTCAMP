@@ -1,6 +1,5 @@
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
 import { User } from 'src/users/user.entity';
-import { KeyResult } from 'src/key-results/key-result.entity';
 import { Objective } from 'src/objectives/objective.entity';
 
 export class CreateObjectiveDto {
@@ -28,9 +27,10 @@ export class CreateObjectiveDto {
   @IsNotEmpty({ message: 'Informe uma área' })
   area: string;
 
+  @IsString()
+  @IsNotEmpty({ message: 'Informe um proprietário' })
   owner: User;
 
-  key_results: KeyResult;
-
+  @IsOptional()
   objective_related: Objective;
 }

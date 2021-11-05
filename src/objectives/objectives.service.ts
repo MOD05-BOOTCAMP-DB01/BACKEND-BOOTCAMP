@@ -9,6 +9,7 @@ import { UserRole } from '../users/user-roles.enum';
 import { CreateObjectiveDto } from './dtos/create-objective.dto';
 import { Objective } from './objective.entity';
 import { UpdateObjectiveDto } from './dtos/update-objective.dto';
+import { KeyResult } from 'src/key-results/key-result.entity';
 
 @Injectable()
 export class ObjectivesService {
@@ -27,9 +28,16 @@ export class ObjectivesService {
   }
 
   async findAll() {
-    return this.objectiveRepository.find({
-      relations: ['objective_related'],
-    });
+    return await this.objectiveRepository.find();
+  }
+
+  async findKeyResult(keyResultId: string): Promise<KeyResult[]> {
+    const keyResult = await this.objectiveRepository.findKeyResult(keyResultId);
+
+    if (!keyResult)
+      throw new NotFoundException('Resultado-chave não encontrado');
+
+    return keyResult;
   }
 
   async findOne(objectiveId: string): Promise<Objective> {

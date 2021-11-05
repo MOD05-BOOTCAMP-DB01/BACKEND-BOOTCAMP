@@ -47,7 +47,7 @@ export class CreateKeyResultDto {
 
   owner: User;
 
-  objectives: Objective[];
+  objective: Objective;
 
   checkin: Checkin[];
 }

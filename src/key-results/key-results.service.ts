@@ -26,10 +26,8 @@ export class KeyResultsService {
     );
   }
 
-  async findAll(): Promise<KeyResult[]> {
-    return KeyResult.find({
-      relations: ['checkin', 'objectives', 'owner'],
-    });
+  async findAll() {
+    return await this.keyResultRepository.find();
   }
 
   async findOne(keyResultId: string): Promise<KeyResult> {

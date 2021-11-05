@@ -24,7 +24,6 @@ export class ObjectiveRepository extends Repository<Objective> {
       unity,
       area,
       owner,
-      key_results,
       objective_related,
     } = createObjectiveDto;
     const obj = this.create();
@@ -35,7 +34,6 @@ export class ObjectiveRepository extends Repository<Objective> {
     obj.unity = unity;
     obj.area = area;
     obj.owner = owner;
-    obj.key_results = key_results;
     obj.objective_related = objective_related;
 
     try {
@@ -50,5 +48,13 @@ export class ObjectiveRepository extends Repository<Objective> {
         );
       }
     }
+  }
+
+  async findKeyResult(id: string): Promise<any> {
+    const query = this.createQueryBuilder('key_result');
+    query.where('key_result.id = :id', { id });
+    query.innerJoinAndSelect('key_result.objectives', 'objectives');
+    query.select(['key_result.id', 'objectives']);
+    return await query.getOne();
   }
 }
