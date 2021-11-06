@@ -9,7 +9,6 @@ import { UserRole } from '../users/user-roles.enum';
 import { CreateKeyResultDto } from './dtos/create-key-result.dto';
 import { UpdateKeyResultDto } from './dtos/update-key-result.dto';
 import { KeyResult } from './key-result.entity';
-import { Checkin } from 'src/checkin/checkin.entity';
 
 @Injectable()
 export class KeyResultsService {
@@ -41,14 +40,6 @@ export class KeyResultsService {
     if (!kr) throw new NotFoundException('Resultado-chave não encontrado');
 
     return kr;
-  }
-
-  async findCheckin(id: string): Promise<Checkin[]> {
-    const checkin = await this.keyResultRepository.findCheckin(id);
-
-    if (!checkin) throw new NotFoundException('Check-in não encontrado');
-
-    return checkin;
   }
 
   async updateKeyResult(

@@ -32,4 +32,12 @@ export class CheckinRepository extends Repository<Checkin> {
       }
     }
   }
+
+  async findKeyResult(id: string): Promise<any> {
+    const query = this.createQueryBuilder('checkin');
+    query.where('key_result.id = :id', { id });
+    query.innerJoinAndSelect('checkin.key_result', 'key_result');
+    query.select(['key_result.id', 'checkin']);
+    return await query.getMany();
+  }
 }

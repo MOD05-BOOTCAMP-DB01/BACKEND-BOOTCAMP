@@ -55,11 +55,6 @@ export class KeyResultsController {
     };
   }
 
-  @Get('/:id/checkin')
-  async findCheckin(@Param('id') id: string) {
-    return await this.keyResultsService.findCheckin(id);
-  }
-
   @Patch('/:id')
   async updateKeyResult(
     @Body(ValidationPipe) updateKeyResultDto: UpdateKeyResultDto,

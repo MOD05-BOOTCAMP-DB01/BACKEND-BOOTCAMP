@@ -40,6 +40,15 @@ export class CheckinService {
     return check;
   }
 
+  async findKeyResult(id: string): Promise<Checkin[]> {
+    const keyResult = await this.checkinRepository.findKeyResult(id);
+
+    if (!keyResult)
+      throw new NotFoundException('Resultado-chave não encontrado');
+
+    return keyResult;
+  }
+
   async updateCheckin(
     updateCheckinDto: UpdateCheckinDto,
     id: string,
