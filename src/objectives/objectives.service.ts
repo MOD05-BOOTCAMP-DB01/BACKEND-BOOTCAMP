@@ -44,7 +44,7 @@ export class ObjectivesService {
 
   async findOne(objectiveId: string): Promise<Objective> {
     const obj = await this.objectiveRepository.findOne(objectiveId, {
-      select: ['objective', 'type', 'unity', 'area', 'id'],
+      relations: ['owner'],
     });
 
     if (!obj) throw new NotFoundException('Objetivo não encontrado');
