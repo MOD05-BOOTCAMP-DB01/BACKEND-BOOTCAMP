@@ -52,6 +52,6 @@ export class KeyResult extends BaseEntity {
   @ManyToOne(() => Objective, (objective) => objective.key_results)
   objective: Objective;
 
-  @OneToMany(() => Checkin, (checkin) => checkin.key_result)
+  @ManyToOne(() => Checkin, (checkin) => checkin.key_result)
   checkin: Checkin[];
 }

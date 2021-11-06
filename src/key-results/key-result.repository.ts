@@ -38,10 +38,10 @@ export class KeyResultRepository extends Repository<KeyResult> {
   }
 
   async findCheckin(id: string): Promise<any> {
-    const query = this.createQueryBuilder('checkin');
-    query.where('checkin.id = :id', { id });
+    const query = this.createQueryBuilder('key_result');
+    query.where('key_result.id = :id', { id });
     query.innerJoinAndSelect('checkin.key_result', 'key_result');
-    query.select(['checkin.id', 'key_result']);
+    query.select(['key_result.id', 'checkin.key_result']);
     return await query.getOne();
   }
 }

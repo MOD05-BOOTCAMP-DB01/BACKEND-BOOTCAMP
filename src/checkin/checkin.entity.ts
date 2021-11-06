@@ -5,7 +5,7 @@ import {
   PrimaryGeneratedColumn,
   Unique,
   JoinColumn,
-  ManyToOne,
+  OneToMany,
 } from 'typeorm';
 import { KeyResult } from 'src/key-results/key-result.entity';
 
@@ -22,6 +22,6 @@ export class Checkin extends BaseEntity {
   current_value: number;
 
   @JoinColumn({ name: 'key_result_id' })
-  @ManyToOne(() => KeyResult, (key_result) => key_result.checkin)
+  @OneToMany(() => KeyResult, (key_result) => key_result.checkin)
   key_result: KeyResult;
 }
