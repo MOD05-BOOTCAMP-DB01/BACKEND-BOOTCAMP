@@ -37,9 +37,7 @@ export class Objective extends BaseEntity {
   unity: string;
 
   @JoinColumn({ name: 'owner_id' })
-  @ManyToOne(() => User, (owner) => owner.objectives, {
-    eager: true,
-  })
+  @ManyToOne(() => User, (owner) => owner.objectives)
   owner: User;
 
   @JoinColumn({ name: 'key_result_id' })

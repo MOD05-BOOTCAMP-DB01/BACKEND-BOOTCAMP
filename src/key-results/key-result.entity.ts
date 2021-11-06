@@ -7,7 +7,6 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
-  OneToOne,
 } from 'typeorm';
 import { User } from 'src/users/user.entity';
 import { Objective } from 'src/objectives/objective.entity';
@@ -47,9 +46,7 @@ export class KeyResult extends BaseEntity {
   done: boolean;
 
   @JoinColumn({ name: 'owner_id' })
-  @ManyToOne(() => User, (owner) => owner.key_results, {
-    eager: true,
-  })
+  @ManyToOne(() => User, (owner) => owner.key_results)
   owner: User;
 
   @ManyToOne(() => Objective, (objective) => objective.key_results)
