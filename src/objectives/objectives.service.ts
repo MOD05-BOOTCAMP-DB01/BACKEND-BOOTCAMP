@@ -28,7 +28,9 @@ export class ObjectivesService {
   }
 
   async findAll(): Promise<Objective[]> {
-    return Objective.find();
+    return Objective.find({
+      relations: ['owner'],
+    });
   }
 
   async findKeyResult(objectiveId: string): Promise<KeyResult[]> {
