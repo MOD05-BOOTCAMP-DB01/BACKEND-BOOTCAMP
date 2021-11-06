@@ -33,6 +33,7 @@ export class CreateObjectiveDto {
   owner: User;
 
   @IsArray()
+  @IsOptional()
   key_results: KeyResult[];
 
   @IsOptional()
