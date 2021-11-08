@@ -6,7 +6,6 @@ import {
   Unique,
   JoinColumn,
   ManyToOne,
-  OneToMany,
 } from 'typeorm';
 import { User } from 'src/users/user.entity';
 import { Objective } from 'src/objectives/objective.entity';
