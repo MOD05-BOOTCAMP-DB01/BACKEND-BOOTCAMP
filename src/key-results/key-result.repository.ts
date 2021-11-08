@@ -13,13 +13,29 @@ export class KeyResultRepository extends Repository<KeyResult> {
     createKeyResultDto: CreateKeyResultDto,
     role: UserRole,
   ): Promise<KeyResult> {
-    const { key_result, type, frequency, rating, owner, objective } =
-      createKeyResultDto;
+    const {
+      key_result,
+      type,
+      frequency,
+      rating,
+      initial_value,
+      goal_value,
+      status,
+      comment,
+      done,
+      owner,
+      objective,
+    } = createKeyResultDto;
     const kr = this.create();
     kr.key_result = key_result;
     kr.type = type;
     kr.frequency = frequency;
     kr.rating = rating;
+    kr.initial_value = initial_value;
+    kr.goal_value = goal_value;
+    kr.status = status;
+    kr.comment = comment;
+    kr.done = done;
     kr.owner = owner;
     kr.objective = objective;
 

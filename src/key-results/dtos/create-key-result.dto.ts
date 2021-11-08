@@ -27,11 +27,11 @@ export class CreateKeyResultDto {
   rating: string;
 
   @IsNumber()
-  @IsOptional()
+  @IsNotEmpty({ message: 'Informe o valor inicial' })
   initial_value: number;
 
   @IsNumber()
-  @IsOptional()
+  @IsNotEmpty({ message: 'Informe o valor da meta' })
   goal_value: number;
 
   @IsNumber()

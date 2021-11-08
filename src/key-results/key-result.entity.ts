@@ -30,10 +30,10 @@ export class KeyResult extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', length: 50 })
   rating: string;
 
-  @Column({ nullable: true, type: 'float' })
+  @Column({ nullable: false, type: 'float' })
   initial_value: number;
 
-  @Column({ nullable: true, type: 'float' })
+  @Column({ nullable: false, type: 'float' })
   goal_value: number;
 
   @Column({ nullable: true, type: 'float' })
