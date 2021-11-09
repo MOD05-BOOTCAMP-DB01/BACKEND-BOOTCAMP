@@ -1,20 +1,21 @@
 # API RestFul - OKR
 
-<center> 
+<div style="text-align:center">
 
-![Logo personagens clássicos](https://www.db1group.com/wp-content/uploads/2020/07/logo-db1-group-color.png) 
+![Logo personagens clássicos](https://www.db1group.com/wp-content/uploads/2020/07/logo-db1-group-color.png)
 
-</center>
+</div>
 
 >API criada para um sistema de OKR's, utilizando NestJS, TypeORM, PostgreSQL e Docker. Nesta API é possível criar usuários, objetivos e key-results. Bem como fazer consultas.
 
-O OKR é um sistema para definição e acompanhamento dos objetivos de uma empresa/equipe e seus resultados. O OKR possui dois componentes: Os objetivos são descrições qualitativas memoráveis do que deseja alcançar e os Key Results são um conjunto de métricas que medem o seu progresso em direção ao Objetivo. 
+O OKR é um sistema para definição e acompanhamento dos objetivos de uma empresa/equipe e seus resultados. O OKR possui dois componentes: Os objetivos são descrições qualitativas memoráveis do que deseja alcançar e os Key Results são um conjunto de métricas que medem o seu progresso em direção ao Objetivo. Todos os Key Results devem ser quantitativos e mensuráveis.
 
-Todos os Key Results devem ser quantitativos e mensuráveis.
 
 ## Executando o projeto
 
-*Essa API utiliza o Postgres como banco de dados e o TypeORM como ORM focado em Typescript. Devido a utilização do Docker não é necessário instalação prévia de nenhuma aplicação para testá-la. Para execução de testes siga os passos a seguir:
+*Essa API utiliza o Postgres como banco de dados e o TypeORM como ORM focado em Typescript. Devido a utilização do Docker não é necessário instalação prévia de nenhuma aplicação para testá-la. Para execução de testes siga os passos a seguir:*
+
+Para utilizar o projeto faça o dowload do arquivo zip, ou faça o clone em seu computador utilizando o Git.
 
 Para instalação de todos os módulos listados como dependência, digite no terminal:
 
@@ -82,12 +83,17 @@ Essa é a estrutura JSON para fazer o POST e o PUT dos key-results:
 }
 ```
 
-Essa é a estrutura JSON para fazer o POST e o PUT dos checkins:
+Essa é a estrutura JSON para fazer o POST dos checkins:
 
 ```json
 {
     "date": "04/10/2021",
-	"current_value": "Cancelado",
+    "current_value": 3,
 	"key_result": "67d3a3c8-9c6d-43e3-8f0c-24de921324a6"
 }
 ```
+
+## Pessoas Contribuidoras
+
+| [<img src="https://avatars.githubusercontent.com/u/70717919?s=70&v=4" width=115><br><sub>Dorival Ramos</sub>](https://github.com/DorivalRamos) | [<img src="https://avatars.githubusercontent.com/u/58301411?v=4" width=115><br><sub>Janice Caldeira</sub>](https://github.com/janicecaldeira) |  [<img src="https://avatars.githubusercontent.com/u/55546267?v=4" width=115><br><sub>Priscila Miranda</sub>](https://github.com/priscilafraser) |
+| :---: | :---: | :---: |
