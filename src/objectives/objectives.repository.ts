@@ -56,7 +56,8 @@ export class ObjectiveRepository extends Repository<Objective> {
     const query = this.createQueryBuilder('objective');
     query.where('objective.id = :id', { id });
     query.innerJoinAndSelect('objective.key_results', 'key_results');
-    query.select(['objective.id', 'key_results']);
+    query.innerJoinAndSelect('key_results.owner', 'owner');
+    query.select(['objective.id', 'key_results', 'owner']);
     return await query.getOne();
   }
 }
