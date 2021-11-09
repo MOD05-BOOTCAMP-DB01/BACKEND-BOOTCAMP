@@ -1,73 +1,93 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# API RestFul - OKR
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<center> 
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+![Logo personagens clássicos](https://www.db1group.com/wp-content/uploads/2020/07/logo-db1-group-color.png) 
 
-## Description
+</center>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+>API criada para um sistema de OKR's, utilizando NestJS, TypeORM, PostgreSQL e Docker. Nesta API é possível criar usuários, objetivos e key-results. Bem como fazer consultas.
 
-## Installation
+O OKR é um sistema para definição e acompanhamento dos objetivos de uma empresa/equipe e seus resultados. O OKR possui dois componentes: Os objetivos são descrições qualitativas memoráveis do que deseja alcançar e os Key Results são um conjunto de métricas que medem o seu progresso em direção ao Objetivo. 
 
-```bash
-$ npm install
+Todos os Key Results devem ser quantitativos e mensuráveis.
+
+## Executando o projeto
+
+*Essa API utiliza o Postgres como banco de dados e o TypeORM como ORM focado em Typescript. Devido a utilização do Docker não é necessário instalação prévia de nenhuma aplicação para testá-la. Para execução de testes siga os passos a seguir:
+
+Para instalação de todos os módulos listados como dependência, digite no terminal:
+
+* `npm i`
+
+Para executar o projeto com o node, digite no terminal:
+
+* `npm run start:dev`
+
+
+## Testando a API
+
+Você pode utilizar algumas ferramentas para teste, porém durante a construção desta API foi utilizado o Insomnia, que é simples, porém muito poderoso. E também o Beekeeper Studio que é um editor SQL de código aberto e um aplicativo de gerenciamento de banco de dados.
+
+### Exemplos de URLs:
+
+* Essa é a URL de teste padrão para buscar todos os usuários: 
+
+    http://localhost:3000/users
+
+* Para buscar todos os objetivos:
+
+     http://localhost:3000/objectives
+
+
+### Exemplos de estruturas JSON:
+
+Essa é a estrutura JSON para criar um usuário:
+
+```json
+{
+	"email": "user@gmail.com",
+	"username": "user",
+	"password": "Senha123@",
+	"passwordConfirmation": "Senha123@"
+}
 ```
 
-## Running the app
+Essa é a estrutura JSON para fazer o POST e o PUT dos objetivos:
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```json
+{
+    "objective": "Aumentar 10% do faturamento anual",
+	"type": "Aumentar valor",
+	"initial_date": "01/01/2021",
+	"end_date": "31/12/2021",
+	"unity": "Gestão",
+	"area": "RH",
+	"owner": "af5f8afb-c019-4eab-9cfc-e01f27e4294c"
+}
 ```
 
-## Test
+Essa é a estrutura JSON para fazer o POST e o PUT dos key-results:
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```json
+{
+    "key_result": "Fechar 10 vendas por dia",
+	"type": "Entregável",
+	"frequency": "Semanal",
+	"rating": "Alta",
+	"initial_value": 1,
+	"goal_value": 3,
+	"comment": "Melhorar índice de conversão",
+	"owner": "af5f8afb-c019-4eab-9cfc-e01f27e4294c"
+}
 ```
 
-## Support
+Essa é a estrutura JSON para fazer o POST e o PUT dos checkins:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+```json
+{
+    "date": "04/10/2021",
+	"current_value": "Cancelado",
+	"key_result": "67d3a3c8-9c6d-43e3-8f0c-24de921324a6"
+}
+```
