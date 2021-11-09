@@ -1,9 +1,12 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
   name: 'default',
   type: 'postgres',
-  url: 'postgres://islnkpnx:bVU2Iiuojt5yHvuN79W6hRFJ9vB9_fo1@kesavan.db.elephantsql.com/islnkpnx',
+  url: process.env.TYPEORM_URL,
   logging: true,
   entities: [__dirname + '/../**/*.entity.{js,ts}'],
   synchronize: true,
