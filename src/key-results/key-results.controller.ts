@@ -27,7 +27,7 @@ export class KeyResultsController {
   constructor(private keyResultsService: KeyResultsService) {}
 
   @Post()
-  @Role(UserRole.USER)
+  @Role(UserRole.USER && UserRole.MANAGER)
   async createKeyResult(
     @Body(ValidationPipe) createKeyResultDto: CreateKeyResultDto,
   ): Promise<ReturnKeyResultDto> {
