@@ -28,7 +28,6 @@ export class CreateObjectiveDto {
   @IsNotEmpty({ message: 'Informe uma área' })
   area: string;
 
-  @IsString()
   @IsNotEmpty({ message: 'Informe um proprietário' })
   owner: User;
 
