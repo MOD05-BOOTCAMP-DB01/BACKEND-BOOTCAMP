@@ -11,6 +11,7 @@ import {
 } from 'typeorm';
 import { User } from 'src/users/user.entity';
 import { KeyResult } from 'src/key-results/key-result.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 @Unique(['id'])
@@ -19,21 +20,27 @@ export class Objective extends BaseEntity {
   id: string;
 
   @Column({ nullable: false, type: 'varchar', length: 120 })
+  @ApiProperty({description: 'Especificar objetivo'})
   objective: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
+  @ApiProperty({description: 'Tipo de objetivo'})
   type: string;
 
   @Column({ nullable: false, type: 'varchar', length: 20 })
+  @ApiProperty({description: 'Data inicial'})
   initial_date: string;
 
   @Column({ nullable: false, type: 'varchar', length: 20 })
+  @ApiProperty({description: 'Data final'})
   end_date: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
+  @ApiProperty()
   area: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
+  @ApiProperty()
   unity: string;
 
   @JoinColumn({ name: 'owner_id' })

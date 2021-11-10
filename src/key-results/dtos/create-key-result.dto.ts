@@ -13,42 +13,42 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CreateKeyResultDto {
   @IsString()
   @IsNotEmpty({ message: 'Informe um resultado-chave' })
-  @ApiProperty()
+  @ApiProperty({description: 'Especificar resultado-chave'})
   key_result: string;
 
   @IsString()
   @IsNotEmpty({ message: 'Informe o tipo do resultado-chave' })
-  @ApiProperty()
+  @ApiProperty({description: 'Tipo de resultado-chave'})
   type: string;
 
   @IsString()
   @IsNotEmpty({ message: 'Informe a frequência' })
-  @ApiProperty()
+  @ApiProperty({description: 'Frequência de mensuração'})
   frequency: string;
 
   @IsString()
   @IsNotEmpty({ message: 'Informe a classificação' })
-  @ApiProperty()
+  @ApiProperty({description: 'Classificação de prioridade'})
   rating: string;
 
   @IsNumber()
   @IsNotEmpty({ message: 'Informe o valor inicial' })
-  @ApiProperty()
+  @ApiProperty({description: 'Valor inicial'})
   initial_value: number;
 
   @IsNumber()
   @IsNotEmpty({ message: 'Informe o valor da meta' })
-  @ApiProperty()
+  @ApiProperty({description: 'Meta prevista'})
   goal_value: number;
 
   @IsNumber()
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({description: 'Valor atual em porcentagem'})
   status: number;
 
   @IsString()
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({description: 'Comentários extras'})
   comment: string;
 
   @IsBoolean()

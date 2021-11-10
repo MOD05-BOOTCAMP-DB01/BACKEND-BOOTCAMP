@@ -3,19 +3,19 @@ import { ApiProperty} from '@nestjs/swagger';
 
 export class UpdateObjectiveDto {
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({description: 'Especificar objetivo'})
   objective: string;
 
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({description: 'Tipo de objetivo'})
   type: string;
 
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({description: 'Data inicial'})
   initial_date: string;
 
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({description: 'Data final'})
   end_date: string;
 
   @IsOptional()

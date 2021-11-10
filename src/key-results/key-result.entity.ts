@@ -10,6 +10,7 @@ import {
 import { User } from 'src/users/user.entity';
 import { Objective } from 'src/objectives/objective.entity';
 import { Checkin } from 'src/checkin/checkin.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 @Unique(['id'])
@@ -18,30 +19,39 @@ export class KeyResult extends BaseEntity {
   id: string;
 
   @Column({ nullable: false, type: 'varchar', length: 120 })
+  @ApiProperty({description: 'Especificar resultado-chave'})
   key_result: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
+  @ApiProperty({description: 'Tipo de resultado-chave'})
   type: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
+  @ApiProperty({description: 'Frequência de mensuração'})
   frequency: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
+  @ApiProperty({description: 'Classificação de prioridade'})
   rating: string;
 
   @Column({ nullable: false, type: 'float' })
+  @ApiProperty({description: 'Valor inicial'})
   initial_value: number;
 
   @Column({ nullable: false, type: 'float' })
+  @ApiProperty({description: 'Meta prevista'})
   goal_value: number;
 
   @Column({ nullable: true, type: 'float' })
+  @ApiProperty({description: 'Valor atual em porcentagem'})
   status: number;
 
   @Column({ nullable: true, type: 'varchar', length: 120 })
+  @ApiProperty()
   comment: string;
 
   @Column({ nullable: true, type: 'boolean' })
+  @ApiProperty({description: 'Comentários extras'})
   done: boolean;
 
   @JoinColumn({ name: 'owner_id' })

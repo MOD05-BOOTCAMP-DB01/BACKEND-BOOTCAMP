@@ -4,42 +4,42 @@ import { ApiProperty} from '@nestjs/swagger';
 export class UpdateKeyResultDto {
   @IsString()
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({description: 'Especificar resultado-chave'})
   key_result: string;
 
   @IsString()
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({description: 'Tipo de resultado-chave'})
   type: string;
 
   @IsString()
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({description: 'Frequência de mensuração'})
   frequency: string;
 
   @IsString()
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({description: 'Classificação de prioridade'})
   rating: string;
 
   @IsNumber()
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({description: 'Valor inicial'})
   initial_value: number;
 
   @IsNumber()
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({description: 'Meta prevista'})
   goal_value: number;
 
   @IsNumber()
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({description: 'Valor atual em porcentagem'})
   status: number;
 
   @IsString()
   @IsOptional()
-  @ApiProperty()
+  @ApiProperty({description: 'Comentários extras'})
   comment: string;
 
   @IsBoolean()
