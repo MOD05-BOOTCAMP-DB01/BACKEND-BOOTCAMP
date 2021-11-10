@@ -19,31 +19,31 @@ export class KeyResult extends BaseEntity {
   id: string;
 
   @Column({ nullable: false, type: 'varchar', length: 120 })
-  @ApiProperty({description: 'Especificar resultado-chave'})
+  @ApiProperty({ description: 'Especificar resultado-chave' })
   key_result: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
-  @ApiProperty({description: 'Tipo de resultado-chave'})
+  @ApiProperty({ description: 'Tipo de resultado-chave' })
   type: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
-  @ApiProperty({description: 'Frequência de mensuração'})
+  @ApiProperty({ description: 'Frequência de mensuração' })
   frequency: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
-  @ApiProperty({description: 'Classificação de prioridade'})
+  @ApiProperty({ description: 'Classificação de prioridade' })
   rating: string;
 
   @Column({ nullable: false, type: 'float' })
-  @ApiProperty({description: 'Valor inicial'})
+  @ApiProperty({ description: 'Valor inicial' })
   initial_value: number;
 
   @Column({ nullable: false, type: 'float' })
-  @ApiProperty({description: 'Meta prevista'})
+  @ApiProperty({ description: 'Meta prevista' })
   goal_value: number;
 
   @Column({ nullable: true, type: 'float' })
-  @ApiProperty({description: 'Valor atual em porcentagem'})
+  @ApiProperty({ description: 'Valor atual em porcentagem' })
   status: number;
 
   @Column({ nullable: true, type: 'varchar', length: 120 })
@@ -51,7 +51,7 @@ export class KeyResult extends BaseEntity {
   comment: string;
 
   @Column({ nullable: true, type: 'boolean' })
-  @ApiProperty({description: 'Comentários extras'})
+  @ApiProperty({ description: 'Comentários extras' })
   done: boolean;
 
   @JoinColumn({ name: 'owner_id' })

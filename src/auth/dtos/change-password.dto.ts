@@ -16,7 +16,7 @@ export class ChangePasswordDto {
     message:
       'A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial',
   })
-  @ApiProperty({description: 'Senha do usuário'})
+  @ApiProperty({ description: 'Senha do usuário' })
   password: string;
 
   @IsNotEmpty({ message: 'Informe a confirmação de senha' })
@@ -27,6 +27,6 @@ export class ChangePasswordDto {
     message:
       'A confirmação de senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial',
   })
-  @ApiProperty({description: 'Confirmação de senha'})
+  @ApiProperty({ description: 'Confirmação de senha' })
   confirmationPassword: string;
 }

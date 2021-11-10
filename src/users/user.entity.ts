@@ -18,15 +18,15 @@ export class User extends BaseEntity {
   id: string;
 
   @Column({ nullable: false, type: 'varchar', length: 200 })
-  @ApiProperty({description: 'E-mail do usuário'})
+  @ApiProperty({ description: 'E-mail do usuário' })
   email: string;
 
   @Column({ nullable: false, type: 'varchar', length: 200 })
-  @ApiProperty({description: 'Nome ou identificação do usuário para acesso'})
+  @ApiProperty({ description: 'Nome ou identificação do usuário para acesso' })
   username: string;
 
   @Column({ nullable: false })
-  @ApiProperty({description: 'Senha do usuário'})
+  @ApiProperty({ description: 'Senha do usuário' })
   password: string;
 
   @Column({ nullable: true, type: 'varchar', length: 64 })
@@ -45,7 +45,7 @@ export class User extends BaseEntity {
   role: string;
 
   @Column({ nullable: false, default: true })
-  @ApiProperty({description: 'Atividade do usuário'})
+  @ApiProperty({ description: 'Atividade do usuário' })
   status: boolean;
 
   @OneToMany(() => Objective, (objectives) => objectives.owner)

@@ -79,7 +79,6 @@ export class UsersController {
   }
 
   @Get('/:id')
-  @Role(UserRole.ADMIN)
   async findOne(@Param('id') id: string): Promise<ReturnUserDto> {
     const user = await this.usersService.findOne(id);
     return {

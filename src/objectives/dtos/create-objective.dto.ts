@@ -7,22 +7,22 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CreateObjectiveDto {
   @IsString()
   @IsNotEmpty({ message: 'Informe um objetivo' })
-  @ApiProperty({description: 'Especificar objetivo'})
+  @ApiProperty({ description: 'Especificar objetivo' })
   objective: string;
 
   @IsString()
   @IsNotEmpty({ message: 'Informe um tipo' })
-  @ApiProperty({description: 'Tipo de objetivo'})
+  @ApiProperty({ description: 'Tipo de objetivo' })
   type: string;
 
   @IsString()
   @IsNotEmpty({ message: 'Informe uma data inicial' })
-  @ApiProperty({description: 'Data inicial'})
+  @ApiProperty({ description: 'Data inicial' })
   initial_date: string;
 
   @IsString()
   @IsNotEmpty({ message: 'Informe uma data final' })
-  @ApiProperty({description: 'Data final'})
+  @ApiProperty({ description: 'Data final' })
   end_date: string;
 
   @IsString()
@@ -36,7 +36,7 @@ export class CreateObjectiveDto {
   area: string;
 
   @IsNotEmpty({ message: 'Informe um proprietário' })
-  @ApiProperty({description: 'Proprietário do objetivo'})
+  @ApiProperty({ description: 'Proprietário do objetivo' })
   owner: User;
 
   @IsArray()

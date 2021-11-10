@@ -13,13 +13,13 @@ export class CreateUserDto {
   @IsNotEmpty({ message: 'Informe um endereço de e-mail' })
   @IsEmail({}, { message: 'Informe um e-mail válido' })
   @MaxLength(200, { message: 'O e-mail deve ter menos de 200 caracteres' })
-  @ApiProperty({description: 'E-mail do usuário'})
+  @ApiProperty({ description: 'E-mail do usuário' })
   email: string;
 
   @IsString()
   @IsNotEmpty({ message: 'Informe um nome de usuário' })
   @MaxLength(200, { message: 'O nome deve ter menos de 200 caracteres' })
-  @ApiProperty({description: 'Confirmação do e-mail do usuário'})
+  @ApiProperty({ description: 'Confirmação do e-mail do usuário' })
   username: string;
 
   @IsNotEmpty({ message: 'Informe uma senha' })
@@ -30,7 +30,10 @@ export class CreateUserDto {
     message:
       'A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial',
   })
-  @ApiProperty({description: 'Senha do usuário. Deve ter no mínimo 8 e no máximo 32 caracteres, deve conter letras maiúsculas, minúsculas, número e caracteres especiais'})
+  @ApiProperty({
+    description:
+      'Senha do usuário. Deve ter no mínimo 8 e no máximo 32 caracteres, deve conter letras maiúsculas, minúsculas, número e caracteres especiais',
+  })
   password: string;
 
   @IsNotEmpty({ message: 'Informe a confimação de senha' })
@@ -45,6 +48,6 @@ export class CreateUserDto {
     message:
       'A confirmação de senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial',
   })
-  @ApiProperty({description: 'Confirmação da senha do usuário'})
+  @ApiProperty({ description: 'Confirmação da senha do usuário' })
   passwordConfirmation: string;
 }
