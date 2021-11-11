@@ -29,6 +29,9 @@ export class ObjectivesService {
 
   async findAll(): Promise<Objective[]> {
     return Objective.find({
+      order: {
+        createdAt: 'ASC',
+      },
       relations: ['owner'],
     });
   }

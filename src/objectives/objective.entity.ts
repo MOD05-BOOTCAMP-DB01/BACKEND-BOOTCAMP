@@ -8,6 +8,7 @@ import {
   JoinColumn,
   ManyToMany,
   OneToMany,
+  CreateDateColumn,
 } from 'typeorm';
 import { User } from 'src/users/user.entity';
 import { KeyResult } from 'src/key-results/key-result.entity';
@@ -57,4 +58,7 @@ export class Objective extends BaseEntity {
     (objective_related) => objective_related.objective,
   )
   objective_related: Objective;
+
+  @CreateDateColumn()
+  createdAt: Date;
 }
