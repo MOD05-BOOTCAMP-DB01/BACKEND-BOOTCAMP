@@ -6,6 +6,7 @@ import {
   Unique,
   JoinColumn,
   ManyToOne,
+  CreateDateColumn,
 } from 'typeorm';
 import { KeyResult } from 'src/key-results/key-result.entity';
 
@@ -24,4 +25,7 @@ export class Checkin extends BaseEntity {
   @JoinColumn({ name: 'key_result_id' })
   @ManyToOne(() => KeyResult, (key_result) => key_result.checkin)
   key_result: KeyResult;
+
+  @CreateDateColumn()
+  createdAt: Date;
 }

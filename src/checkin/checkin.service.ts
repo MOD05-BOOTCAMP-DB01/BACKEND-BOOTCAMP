@@ -26,6 +26,9 @@ export class CheckinService {
 
   async findAll() {
     return this.checkinRepository.find({
+      order: {
+        createdAt: 'ASC',
+      },
       relations: ['key_result'],
     });
   }
