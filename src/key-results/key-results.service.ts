@@ -28,6 +28,9 @@ export class KeyResultsService {
 
   async findAll() {
     return await this.keyResultRepository.find({
+      order: {
+        createdAt: 'ASC',
+      },
       relations: ['objective', 'owner'],
     });
   }

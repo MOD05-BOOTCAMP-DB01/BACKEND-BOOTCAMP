@@ -6,6 +6,7 @@ import {
   Unique,
   JoinColumn,
   ManyToOne,
+  CreateDateColumn,
 } from 'typeorm';
 import { User } from 'src/users/user.entity';
 import { Objective } from 'src/objectives/objective.entity';
@@ -63,4 +64,7 @@ export class KeyResult extends BaseEntity {
 
   @ManyToOne(() => Checkin, (checkin) => checkin.key_result)
   checkin: Checkin[];
+
+  @CreateDateColumn()
+  createdAt: Date;
 }
