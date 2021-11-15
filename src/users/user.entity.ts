@@ -48,10 +48,14 @@ export class User extends BaseEntity {
   @ApiProperty({ description: 'Atividade do usuário' })
   status: boolean;
 
-  @OneToMany(() => Objective, (objectives) => objectives.owner)
+  @OneToMany(() => Objective, (objectives) => objectives.owner, {
+    cascade: true,
+  })
   objectives: Objective[];
 
-  @OneToMany(() => KeyResult, (key_results) => key_results.owner)
+  @OneToMany(() => KeyResult, (key_results) => key_results.owner, {
+    cascade: true,
+  })
   key_results: KeyResult[];
 
   async checkPassword(password: string): Promise<boolean> {

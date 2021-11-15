@@ -23,7 +23,10 @@ export class Checkin extends BaseEntity {
   current_value: number;
 
   @JoinColumn({ name: 'key_result_id' })
-  @ManyToOne(() => KeyResult, (key_result) => key_result.checkin)
+  @ManyToOne(() => KeyResult, (key_result) => key_result.checkin, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   key_result: KeyResult;
 
   @CreateDateColumn()

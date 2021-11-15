@@ -45,17 +45,26 @@ export class Objective extends BaseEntity {
   unity: string;
 
   @JoinColumn({ name: 'owner_id' })
-  @ManyToOne(() => User, (owner) => owner.objectives)
+  @ManyToOne(() => User, (owner) => owner.objectives, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   owner: User;
 
   @JoinColumn({ name: 'key_result_id' })
-  @OneToMany(() => KeyResult, (key_results) => key_results.objective)
+  @OneToMany(() => KeyResult, (key_results) => key_results.objective, {
+    cascade: true,
+  })
   key_results: KeyResult[];
 
   @JoinColumn({ name: 'objective_related_id' })
   @ManyToMany(
     () => Objective,
     (objective_related) => objective_related.objective,
+    {
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    },
   )
   objective_related: Objective;
 

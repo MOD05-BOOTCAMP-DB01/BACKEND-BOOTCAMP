@@ -56,13 +56,21 @@ export class KeyResult extends BaseEntity {
   done: boolean;
 
   @JoinColumn({ name: 'owner_id' })
-  @ManyToOne(() => User, (owner) => owner.key_results)
+  @ManyToOne(() => User, (owner) => owner.key_results, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   owner: User;
 
-  @ManyToOne(() => Objective, (objective) => objective.key_results)
+  @ManyToOne(() => Objective, (objective) => objective.key_results, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   objective: Objective;
 
-  @ManyToOne(() => Checkin, (checkin) => checkin.key_result)
+  @ManyToOne(() => Checkin, (checkin) => checkin.key_result, {
+    cascade: true,
+  })
   checkin: Checkin[];
 
   @CreateDateColumn()
