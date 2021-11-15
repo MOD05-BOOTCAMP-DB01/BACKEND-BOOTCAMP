@@ -16,7 +16,7 @@ export class Checkin extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 20 })
+  @Column({ nullable: false, type: 'varchar', length: 100 })
   date: string;
 
   @Column({ nullable: false, type: 'float' })

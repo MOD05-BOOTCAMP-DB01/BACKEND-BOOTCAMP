@@ -28,11 +28,11 @@ export class Objective extends BaseEntity {
   @ApiProperty({ description: 'Tipo de objetivo' })
   type: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 20 })
+  @Column({ nullable: false, type: 'varchar', length: 100 })
   @ApiProperty({ description: 'Data inicial' })
   initial_date: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 20 })
+  @Column({ nullable: false, type: 'varchar', length: 100 })
   @ApiProperty({ description: 'Data final' })
   end_date: string;
 
