@@ -1,4 +1,5 @@
 import { IsOptional } from 'class-validator';
+import { User } from 'src/users/user.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateObjectiveDto {
@@ -25,4 +26,8 @@ export class UpdateObjectiveDto {
   @IsOptional()
   @ApiProperty()
   area: string;
+
+  @IsOptional()
+  @ApiProperty()
+  owner: User;
 }
