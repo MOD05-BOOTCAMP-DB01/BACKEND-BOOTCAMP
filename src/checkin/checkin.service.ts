@@ -30,6 +30,7 @@ export class CheckinService {
         createdAt: 'ASC',
       },
       relations: ['key_result'],
+      take: 5,
     });
   }
 
