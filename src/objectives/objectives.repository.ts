@@ -58,6 +58,7 @@ export class ObjectiveRepository extends Repository<Objective> {
     query.innerJoinAndSelect('objective.key_results', 'key_results');
     query.innerJoinAndSelect('key_results.owner', 'owner');
     query.select(['objective.id', 'key_results', 'owner']);
+    query.orderBy('key_results.createdAt', 'ASC');
     return await query.getOne();
   }
 }
