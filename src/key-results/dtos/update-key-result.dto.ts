@@ -1,5 +1,7 @@
 import { IsString, IsNumber, IsOptional, IsBoolean } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { User } from 'src/users/user.entity';
+import { Objective } from 'src/objectives/objective.entity';
 
 export class UpdateKeyResultDto {
   @IsString()
@@ -46,4 +48,10 @@ export class UpdateKeyResultDto {
   @IsOptional()
   @ApiProperty()
   done: boolean;
+
+  @IsOptional()
+  owner: User;
+
+  @IsOptional()
+  objective: Objective;
 }

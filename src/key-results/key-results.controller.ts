@@ -61,7 +61,7 @@ export class KeyResultsController {
     @GetUser() user: User,
     @Param('id') id: string,
   ) {
-    if (user.role != UserRole.USER)
+    if (user.role == UserRole.ADMIN)
       throw new ForbiddenException(
         'Você não tem autorização para acessar esse recurso',
       );

@@ -76,7 +76,6 @@ export class ObjectivesController {
   }
 
   @Delete('/:id')
-  @Role(UserRole.MANAGER)
   async deleteObjective(@Param('id') id: string) {
     await this.objectivesService.deleteObjective(id);
     return { message: 'Objetivo excluído com sucesso' };

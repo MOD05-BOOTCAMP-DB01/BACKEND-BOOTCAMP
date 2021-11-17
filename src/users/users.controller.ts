@@ -20,7 +20,15 @@ import { Role } from '../auth/role.decorator';
 import { UserRole } from './user-roles.enum';
 import { User } from './user.entity';
 import { GetUser } from 'src/auth/get-user.decorator';
-import { ApiBearerAuth, ApiCreatedResponse, ApiDefaultResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags, ApiUnprocessableEntityResponse } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiDefaultResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiTags,
+  ApiUnprocessableEntityResponse,
+} from '@nestjs/swagger';
 import { Objective } from 'src/objectives/objective.entity';
 
 @ApiTags('User')
@@ -31,8 +39,8 @@ export class UsersController {
 
   @Post()
   @Role(UserRole.ADMIN)
-  @ApiCreatedResponse({description: 'Usuário cadastrado com sucesso'})
-  @ApiUnprocessableEntityResponse({description: 'As senhas não conferem'})
+  @ApiCreatedResponse({ description: 'Usuário cadastrado com sucesso' })
+  @ApiUnprocessableEntityResponse({ description: 'As senhas não conferem' })
   async createUser(
     @Body(ValidationPipe) createUserDto: CreateUserDto,
   ): Promise<ReturnUserDto> {
@@ -46,8 +54,8 @@ export class UsersController {
 
   @Post('/adm')
   @Role(UserRole.ADMIN)
-  @ApiCreatedResponse({description: 'Administrador cadastrado com sucesso'})
-  @ApiUnprocessableEntityResponse({description: 'As senhas não conferem'})
+  @ApiCreatedResponse({ description: 'Administrador cadastrado com sucesso' })
+  @ApiUnprocessableEntityResponse({ description: 'As senhas não conferem' })
   async createAdminUser(
     @Body(ValidationPipe) createUserDto: CreateUserDto,
   ): Promise<ReturnUserDto> {
@@ -60,8 +68,8 @@ export class UsersController {
 
   @Post('/manager')
   @Role(UserRole.ADMIN)
-  @ApiCreatedResponse({description: 'Gestor cadastrado com sucesso'})
-  @ApiUnprocessableEntityResponse({description: 'As senhas não conferem'})
+  @ApiCreatedResponse({ description: 'Gestor cadastrado com sucesso' })
+  @ApiUnprocessableEntityResponse({ description: 'As senhas não conferem' })
   async createManagerUser(
     @Body(ValidationPipe) createUserDto: CreateUserDto,
   ): Promise<ReturnUserDto> {
@@ -73,29 +81,29 @@ export class UsersController {
   }
 
   @Get()
-  @ApiOkResponse({description: 'Sucesso'})
+  @ApiOkResponse({ description: 'Sucesso' })
   @ApiBearerAuth()
-  @ApiDefaultResponse({type: User})
+  @ApiDefaultResponse({ type: User })
   findAll() {
     return this.usersService.findAll();
   }
 
   @Get('/objectives/:id')
-  @ApiOkResponse({description: 'Sucesso'})
-  @ApiNotFoundResponse({description: 'Usuário não possui objetivos'})
+  @ApiOkResponse({ description: 'Sucesso' })
+  @ApiNotFoundResponse({ description: 'Usuário não possui objetivos' })
   async findObjectiveByUser(@Param('id') id: string) {
     return await this.usersService.findObjectiveByUser(id);
   }
 
   @Get('/key_results/:id')
-  @ApiOkResponse({description: 'Sucesso'})
-  @ApiNotFoundResponse({description: 'Usuário não possui resultados-chave'})
+  @ApiOkResponse({ description: 'Sucesso' })
+  @ApiNotFoundResponse({ description: 'Usuário não possui resultados-chave' })
   async findKeyResultByUser(@Param('id') id: string) {
     return await this.usersService.findKeyResultByUser(id);
   }
 
   @Get('/:id')
-  @ApiOkResponse({description: 'Sucesso'})
+  @ApiOkResponse({ description: 'Sucesso' })
   async findOne(@Param('id') id: string): Promise<ReturnUserDto> {
     const user = await this.usersService.findOne(id);
     return {
@@ -105,7 +113,7 @@ export class UsersController {
   }
 
   @Patch('/:id')
-  @ApiOkResponse({description: 'Usuário atualizado com sucesso'})
+  @ApiOkResponse({ description: 'Usuário atualizado com sucesso' })
   async updateUser(
     @Body(ValidationPipe) updateUserDto: UpdateUserDto,
     @GetUser() user: User,
@@ -122,7 +130,7 @@ export class UsersController {
 
   @Delete('/:id')
   @Role(UserRole.ADMIN)
-  @ApiOkResponse({description: 'Usuário excluído com sucesso'})
+  @ApiOkResponse({ description: 'Usuário excluído com sucesso' })
   async deleteUser(@Param('id') id: string) {
     await this.usersService.deleteUser(id);
     return { message: 'Usuário excluído com sucesso' };
