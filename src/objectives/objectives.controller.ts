@@ -51,7 +51,6 @@ export class ObjectivesController {
   }
 
   @Get('/:id')
-  @Role(UserRole.MANAGER)
   async findOne(@Param('id') id: string): Promise<ReturnObjectiveDto> {
     const objective = await this.objectivesService.findOne(id);
     return {
@@ -76,6 +75,7 @@ export class ObjectivesController {
   }
 
   @Delete('/:id')
+  @Role(UserRole.MANAGER)
   async deleteObjective(@Param('id') id: string) {
     await this.objectivesService.deleteObjective(id);
     return { message: 'Objetivo excluído com sucesso' };
