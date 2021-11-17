@@ -38,7 +38,6 @@ export class CheckinRepository extends Repository<Checkin> {
     query.where('key_result.id = :id', { id });
     query.innerJoinAndSelect('checkin.key_result', 'key_result');
     query.select(['key_result.id', 'checkin']);
-    query.take(5);
     return await query.getMany();
   }
 }
