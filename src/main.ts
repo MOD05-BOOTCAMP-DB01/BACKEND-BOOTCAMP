@@ -19,7 +19,9 @@ async function bootstrap() {
       'API criada para um sistema de OKRs, utilizando NestJS, TypeORM, PostgreSQL e Docker. Nesta API é possível criar usuários, objetivos e key-results. Bem como fazer consultas por ID.',
     )
     .setVersion('1.0')
-    //.addTag('users')
+    .addBearerAuth({type: 'http', scheme: 'bearer', bearerFormat: 'Token'},
+    'access-token',
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

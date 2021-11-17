@@ -17,12 +17,15 @@ import { User } from '../users/user.entity';
 import { GetUser } from '../auth/get-user.decorator';
 import { ChangePasswordDto } from '../auth/dtos/change-password.dto';
 import { UserRole } from 'src/users/user-roles.enum';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('/signup')
+  @ApiCreatedResponse({description: 'Cadastro realizado com sucesso'})
   async signup(
     @Body(ValidationPipe) createUserDto: CreateUserDto,
   ): Promise<{ message: string }> {
@@ -33,6 +36,8 @@ export class AuthController {
   }
 
   @Post('/signin')
+  @ApiOkResponse({description: 'Login realizado com sucesso'})
+  @ApiUnauthorizedResponse({description: 'Credenciais inválidas'})
   async signin(
     @Body(ValidationPipe) credentialsDto: CredentialsDto,
   ): Promise<{ token: string }> {
@@ -40,6 +45,8 @@ export class AuthController {
   }
 
   @Get('/recover-token/:id')
+  @ApiOkResponse({description: 'Sucesso'})
+  @ApiUnauthorizedResponse({description: 'Você não tem permissão para realizar essa atividade'})
   @UseGuards(AuthGuard())
   async recoverToken(
     @Param('id') id: string,
@@ -54,6 +61,7 @@ export class AuthController {
   }
 
   @Patch('/reset-password/:token')
+  @ApiOkResponse({description: 'Senha alterada com sucesso'})
   async resetPassword(
     @Param('token') token: string,
     @Body(ValidationPipe) changePasswordDto: ChangePasswordDto,
@@ -63,6 +71,8 @@ export class AuthController {
   }
 
   @Patch('/change-password/:id')
+  @ApiOkResponse({description: 'Senha alterada com sucesso'})
+  @ApiUnauthorizedResponse({description: 'Você não tem permissão para realizar essa atividade'})
   @UseGuards(AuthGuard())
   async changePassword(
     @Param('id') id: string,
