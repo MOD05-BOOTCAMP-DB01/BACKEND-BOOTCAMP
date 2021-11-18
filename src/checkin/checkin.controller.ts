@@ -27,7 +27,6 @@ export class CheckinController {
   constructor(private checkinService: CheckinService) {}
 
   @Post()
-  @Role(UserRole.MANAGER)
   async createCheckin(
     @Body(ValidationPipe) createCheckinDto: CreateCheckinDto,
   ): Promise<ReturnCheckinDto> {
