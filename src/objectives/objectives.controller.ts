@@ -71,10 +71,6 @@ export class ObjectivesController {
   }
 
   @Get('/:id')
-  @Role(UserRole.MANAGER)
-  @ApiOperation({ summary: 'Busca objetivo pelo id' })
-  @ApiOkResponse({ description: 'Objetivo encontrado' })
-  @ApiNotFoundResponse({ description: 'Objetivo não encontrado' })
   async findOne(@Param('id') id: string): Promise<ReturnObjectiveDto> {
     const objective = await this.objectivesService.findOne(id);
     return {

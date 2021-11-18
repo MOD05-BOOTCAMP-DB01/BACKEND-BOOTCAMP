@@ -60,6 +60,8 @@ export class KeyResultsService {
       status,
       comment,
       done,
+      owner,
+      objective,
     } = updateKeyResultDto;
     kr.key_result = key_result ? key_result : kr.key_result;
     kr.type = type ? type : kr.type;
@@ -70,6 +72,8 @@ export class KeyResultsService {
     kr.status = status ? status : kr.status;
     kr.comment = comment ? comment : kr.comment;
     kr.done = done ? done : kr.done;
+    kr.owner = owner ? owner : kr.owner;
+    kr.objective = objective ? objective : kr.objective;
 
     try {
       await kr.save();
