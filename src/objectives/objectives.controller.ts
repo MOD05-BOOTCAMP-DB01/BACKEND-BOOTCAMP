@@ -27,6 +27,7 @@ import {
   ApiForbiddenResponse,
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
+  ApiCreatedResponse,
 } from '@nestjs/swagger';
 
 @ApiTags('Objective')
@@ -38,7 +39,10 @@ export class ObjectivesController {
   @Post()
   @Role(UserRole.MANAGER)
   @ApiOperation({ summary: 'Cria objetivos' })
-  @ApiOkResponse({ description: 'Objetivo cadastrado com sucesso' })
+  @ApiCreatedResponse({ description: 'Objetivo cadastrado com sucesso' })
+  @ApiInternalServerErrorResponse({
+    description: 'Erro ao salvar o objetivo no banco de dados',
+  })
   async createObjective(
     @Body(ValidationPipe) createObjectiveDto: CreateObjectiveDto,
   ): Promise<ReturnObjectiveDto> {
@@ -53,7 +57,7 @@ export class ObjectivesController {
 
   @Get()
   @ApiOperation({ summary: 'Busca todos os objetivos' })
-  @ApiOkResponse({ description: 'Objetivo cadastrado com sucesso' })
+  @ApiOkResponse({ description: 'Sucesso' })
   async findAll() {
     return this.objectivesService.findAll();
   }
@@ -69,6 +73,9 @@ export class ObjectivesController {
   }
 
   @Get('/:id')
+  @ApiOperation({ summary: 'Busca objetivo pelo id' })
+  @ApiOkResponse({ description: 'Objetivo encontrado' })
+  @ApiNotFoundResponse({ description: 'Objetivo não encontrado' })
   async findOne(@Param('id') id: string): Promise<ReturnObjectiveDto> {
     const objective = await this.objectivesService.findOne(id);
     return {
@@ -79,7 +86,7 @@ export class ObjectivesController {
 
   @Patch('/:id')
   @ApiOperation({ summary: 'Aplica alterações parciais dos dados' })
-  @ApiOkResponse({ description: 'Sucesso' })
+  @ApiOkResponse({ description: 'Objetivo atualizado com sucesso!' })
   @ApiForbiddenResponse({
     description: 'Você não tem autorização para acessar esse recurso',
   })

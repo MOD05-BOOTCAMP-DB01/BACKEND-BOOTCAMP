@@ -40,7 +40,7 @@ export class ObjectivesService {
     const keyResult = await this.objectiveRepository.findKeyResult(objectiveId);
 
     if (!keyResult)
-      throw new NotFoundException('Resultado-chave não encontrado');
+      throw new NotFoundException('Objetivo não encontrado');
 
     return keyResult;
   }
