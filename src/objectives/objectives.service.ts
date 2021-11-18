@@ -39,8 +39,7 @@ export class ObjectivesService {
   async findKeyResult(objectiveId: string): Promise<KeyResult[]> {
     const keyResult = await this.objectiveRepository.findKeyResult(objectiveId);
 
-    if (!keyResult)
-      throw new NotFoundException('Objetivo não encontrado');
+    if (!keyResult) throw new NotFoundException('Objetivo não encontrado');
 
     return keyResult;
   }
