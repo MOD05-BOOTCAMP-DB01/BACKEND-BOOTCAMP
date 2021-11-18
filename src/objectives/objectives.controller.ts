@@ -23,13 +23,11 @@ import { User } from 'src/users/user.entity';
 import {
   ApiOkResponse,
   ApiTags,
-  ApiDefaultResponse,
   ApiOperation,
   ApiForbiddenResponse,
   ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
 } from '@nestjs/swagger';
-import { Objective } from './objective.entity';
 
 @ApiTags('Objective')
 @Controller('objectives')
