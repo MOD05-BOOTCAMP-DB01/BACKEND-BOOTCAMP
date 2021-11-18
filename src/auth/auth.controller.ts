@@ -19,9 +19,12 @@ import { ChangePasswordDto } from '../auth/dtos/change-password.dto';
 import { UserRole } from 'src/users/user-roles.enum';
 import {
   ApiCreatedResponse,
+  ApiNotFoundResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiTags,
   ApiUnauthorizedResponse,
+  ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
 
 @ApiTags('Auth')
@@ -30,7 +33,9 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('/signup')
+  @ApiOperation({ summary: 'Cadastramento de usuário' })
   @ApiCreatedResponse({ description: 'Cadastro realizado com sucesso' })
+  @ApiUnprocessableEntityResponse({ description: 'As senhas não conferem' })
   async signup(
     @Body(ValidationPipe) createUserDto: CreateUserDto,
   ): Promise<{ message: string }> {
@@ -41,6 +46,7 @@ export class AuthController {
   }
 
   @Post('/signin')
+  @ApiOperation({ summary: 'Faz login de usuário' })
   @ApiOkResponse({ description: 'Login realizado com sucesso' })
   @ApiUnauthorizedResponse({ description: 'Credenciais inválidas' })
   async signin(
@@ -50,7 +56,9 @@ export class AuthController {
   }
 
   @Get('/recover-token/:id')
+  @ApiOperation({ summary: 'Gera token para autenticação' })
   @ApiOkResponse({ description: 'Sucesso' })
+  @ApiNotFoundResponse({ description: 'Usuário não encontrado' })
   @ApiUnauthorizedResponse({
     description: 'Você não tem permissão para realizar essa atividade',
   })
@@ -68,7 +76,11 @@ export class AuthController {
   }
 
   @Patch('/reset-password/:token')
+  @ApiOperation({
+    summary: 'Alterar senha em caso de perda/esquecimento passando um token',
+  })
   @ApiOkResponse({ description: 'Senha alterada com sucesso' })
+  @ApiNotFoundResponse({ description: 'Token inválido' })
   async resetPassword(
     @Param('token') token: string,
     @Body(ValidationPipe) changePasswordDto: ChangePasswordDto,
@@ -78,7 +90,9 @@ export class AuthController {
   }
 
   @Patch('/change-password/:id')
+  @ApiOperation({ summary: 'Mudança de senha do usuário logado' })
   @ApiOkResponse({ description: 'Senha alterada com sucesso' })
+  @ApiUnprocessableEntityResponse({ description: 'As senhas não conferem' })
   @ApiUnauthorizedResponse({
     description: 'Você não tem permissão para realizar essa atividade',
   })
