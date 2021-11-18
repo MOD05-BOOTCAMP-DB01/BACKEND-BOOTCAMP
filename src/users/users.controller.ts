@@ -24,12 +24,14 @@ import {
   ApiBearerAuth,
   ApiCreatedResponse,
   ApiDefaultResponse,
+  ApiForbiddenResponse,
+  ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiOperation,
   ApiTags,
   ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
-import { Objective } from 'src/objectives/objective.entity';
 
 @ApiTags('User')
 @Controller('users')
@@ -39,8 +41,12 @@ export class UsersController {
 
   @Post()
   @Role(UserRole.ADMIN)
+  @ApiOperation({ summary: 'Cria usuário comum' })
   @ApiCreatedResponse({ description: 'Usuário cadastrado com sucesso' })
   @ApiUnprocessableEntityResponse({ description: 'As senhas não conferem' })
+  @ApiInternalServerErrorResponse({
+    description: 'Erro ao salvar o usuário no banco de dados',
+  })
   async createUser(
     @Body(ValidationPipe) createUserDto: CreateUserDto,
   ): Promise<ReturnUserDto> {
@@ -54,8 +60,12 @@ export class UsersController {
 
   @Post('/adm')
   @Role(UserRole.ADMIN)
+  @ApiOperation({ summary: 'Cria usuário administrador' })
   @ApiCreatedResponse({ description: 'Administrador cadastrado com sucesso' })
   @ApiUnprocessableEntityResponse({ description: 'As senhas não conferem' })
+  @ApiInternalServerErrorResponse({
+    description: 'Erro ao salvar o usuário no banco de dados',
+  })
   async createAdminUser(
     @Body(ValidationPipe) createUserDto: CreateUserDto,
   ): Promise<ReturnUserDto> {
@@ -68,8 +78,12 @@ export class UsersController {
 
   @Post('/manager')
   @Role(UserRole.ADMIN)
+  @ApiOperation({ summary: 'Cria usuário manager/gerente' })
   @ApiCreatedResponse({ description: 'Gestor cadastrado com sucesso' })
   @ApiUnprocessableEntityResponse({ description: 'As senhas não conferem' })
+  @ApiInternalServerErrorResponse({
+    description: 'Erro ao salvar o usuário no banco de dados',
+  })
   async createManagerUser(
     @Body(ValidationPipe) createUserDto: CreateUserDto,
   ): Promise<ReturnUserDto> {
@@ -81,6 +95,7 @@ export class UsersController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'Busca todos os usuários' })
   @ApiOkResponse({ description: 'Sucesso' })
   @ApiBearerAuth()
   @ApiDefaultResponse({ type: User })
@@ -89,6 +104,9 @@ export class UsersController {
   }
 
   @Get('/objectives/:id')
+  @ApiOperation({
+    summary: 'Busca objetivos pertencentes a usuário especificado por id',
+  })
   @ApiOkResponse({ description: 'Sucesso' })
   @ApiNotFoundResponse({ description: 'Usuário não possui objetivos' })
   async findObjectiveByUser(@Param('id') id: string) {
@@ -96,6 +114,10 @@ export class UsersController {
   }
 
   @Get('/key_results/:id')
+  @ApiOperation({
+    summary:
+      'Busca resultados-chaves pertencentes a usuário especificado por id',
+  })
   @ApiOkResponse({ description: 'Sucesso' })
   @ApiNotFoundResponse({ description: 'Usuário não possui resultados-chave' })
   async findKeyResultByUser(@Param('id') id: string) {
@@ -103,7 +125,9 @@ export class UsersController {
   }
 
   @Get('/:id')
-  @ApiOkResponse({ description: 'Sucesso' })
+  @ApiOperation({ summary: 'Busca usuário pelo id' })
+  @ApiOkResponse({ description: 'Usuário encontrado' })
+  @ApiNotFoundResponse({ description: 'Usuário não encontrado' })
   async findOne(@Param('id') id: string): Promise<ReturnUserDto> {
     const user = await this.usersService.findOne(id);
     return {
@@ -113,7 +137,14 @@ export class UsersController {
   }
 
   @Patch('/:id')
+  @ApiOperation({ summary: 'Aplica alterações parciais dos dados' })
   @ApiOkResponse({ description: 'Usuário atualizado com sucesso' })
+  @ApiInternalServerErrorResponse({
+    description: 'Erro ao salvar os dados no banco de dados',
+  })
+  @ApiForbiddenResponse({
+    description: 'Você não tem autorização para acessar esse recurso',
+  })
   async updateUser(
     @Body(ValidationPipe) updateUserDto: UpdateUserDto,
     @GetUser() user: User,
@@ -130,7 +161,11 @@ export class UsersController {
 
   @Delete('/:id')
   @Role(UserRole.ADMIN)
+  @ApiOperation({ summary: 'Exclui usuário por id' })
   @ApiOkResponse({ description: 'Usuário excluído com sucesso' })
+  @ApiNotFoundResponse({
+    description: 'Não foi encontrado um usuário com o ID informado',
+  })
   async deleteUser(@Param('id') id: string) {
     await this.usersService.deleteUser(id);
     return { message: 'Usuário excluído com sucesso' };
