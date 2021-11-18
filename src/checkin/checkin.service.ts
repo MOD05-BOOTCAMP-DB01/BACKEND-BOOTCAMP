@@ -57,9 +57,10 @@ export class CheckinService {
     id: string,
   ): Promise<Checkin> {
     const check = await this.findOne(id);
-    const { date, current_value } = updateCheckinDto;
+    const { date, current_value, comment } = updateCheckinDto;
     check.current_value = current_value ? current_value : check.current_value;
     check.date = date ? date : check.date;
+    check.comment = comment ? comment : check.comment;
 
     try {
       await check.save();

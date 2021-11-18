@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 import { KeyResult } from 'src/key-results/key-result.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -16,4 +16,9 @@ export class CreateCheckinDto {
   @IsNotEmpty({ message: 'Informe o ID de um Resultado-chave' })
   @ApiProperty()
   key_result: KeyResult;
+
+  @IsString()
+  @IsOptional()
+  @ApiProperty()
+  comment: string;
 }

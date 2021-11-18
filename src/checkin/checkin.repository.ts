@@ -13,11 +13,12 @@ export class CheckinRepository extends Repository<Checkin> {
     createCheckinDto: CreateCheckinDto,
     role: UserRole,
   ): Promise<Checkin> {
-    const { date, current_value, key_result } = createCheckinDto;
+    const { date, current_value, key_result, comment } = createCheckinDto;
     const check = this.create();
     check.date = date;
     check.current_value = current_value;
     check.key_result = key_result;
+    check.comment = comment;
 
     try {
       await check.save();

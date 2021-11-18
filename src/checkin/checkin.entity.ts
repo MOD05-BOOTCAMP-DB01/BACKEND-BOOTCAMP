@@ -22,6 +22,9 @@ export class Checkin extends BaseEntity {
   @Column({ nullable: false, type: 'float' })
   current_value: number;
 
+  @Column({ nullable: true, type: 'varchar', length: 120 })
+  comment: string;
+
   @JoinColumn({ name: 'key_result_id' })
   @ManyToOne(() => KeyResult, (key_result) => key_result.checkin, {
     onDelete: 'CASCADE',

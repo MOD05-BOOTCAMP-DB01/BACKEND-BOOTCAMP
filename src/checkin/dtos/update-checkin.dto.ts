@@ -11,4 +11,9 @@ export class UpdateCheckinDto {
   @IsOptional()
   @ApiProperty()
   current_value: number;
+
+  @IsString()
+  @IsOptional()
+  @ApiProperty()
+  comment: string;
 }
