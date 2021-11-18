@@ -20,7 +20,15 @@ import { UserRole } from '../users/user-roles.enum';
 import { CheckinService } from './checkin.service';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/users/user.entity';
-import { ApiCreatedResponse, ApiForbiddenResponse, ApiInternalServerErrorResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiForbiddenResponse,
+  ApiInternalServerErrorResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 
 @ApiTags('Checkin')
 @Controller('checkin')
@@ -29,7 +37,7 @@ export class CheckinController {
   constructor(private checkinService: CheckinService) {}
 
   @Post()
-  @ApiOperation(({summary: 'Cria checkins'}))
+  @ApiOperation({ summary: 'Cria checkins' })
   @ApiCreatedResponse({ description: 'Check-in cadastrado com sucesso' })
   @ApiInternalServerErrorResponse({
     description: 'Erro ao salvar o checkin no banco de dados',
@@ -64,9 +72,11 @@ export class CheckinController {
   }
 
   @Get('/key_result/:id')
-  @ApiOperation({summary: 'Busca checkins de um resultado-chave especificado pelo id'})
-  @ApiOkResponse({description: 'Sucesso'})
-  @ApiNotFoundResponse({description: 'Resultado-chave não encontrado'})
+  @ApiOperation({
+    summary: 'Busca checkins de um resultado-chave especificado pelo id',
+  })
+  @ApiOkResponse({ description: 'Sucesso' })
+  @ApiNotFoundResponse({ description: 'Resultado-chave não encontrado' })
   async findCheckin(@Param('id') id: string) {
     return await this.checkinService.findKeyResult(id);
   }
