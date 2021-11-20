@@ -4,8 +4,7 @@ import {
   PrimaryGeneratedColumn,
   Column,
   Unique,
-  ManyToMany,
-  ManyToOne,
+  OneToMany,
 } from 'typeorm';
 import { User } from 'src/users/user.entity';
 import { Objective } from 'src/objectives/objective.entity';
@@ -22,13 +21,13 @@ export class Team extends BaseEntity {
   @ApiProperty({ description: 'Times da empresa' })
   team: string;
 
-  @ManyToMany(() => User, (users) => users.team, {
+  @OneToMany(() => User, (users) => users.team, {
     cascade: true,
   })
   @ApiProperty({ description: 'Usuários de cada time' })
   users: User[];
 
-  @ManyToOne(() => Objective, (objectives) => objectives.team, {
+  @OneToMany(() => Objective, (objectives) => objectives.team, {
     cascade: true,
   })
   @ApiProperty({ description: 'Objetivos de cada time' })

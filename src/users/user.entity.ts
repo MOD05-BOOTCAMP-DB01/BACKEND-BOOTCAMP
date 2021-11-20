@@ -5,8 +5,8 @@ import {
   Column,
   Unique,
   OneToMany,
-  ManyToMany,
   JoinColumn,
+  ManyToOne,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Objective } from 'src/objectives/objective.entity';
@@ -62,7 +62,7 @@ export class User extends BaseEntity {
   key_results: KeyResult[];
 
   @JoinColumn({ name: 'team_id' })
-  @ManyToMany(() => User, (user) => user.team, {
+  @ManyToOne(() => User, (user) => user.team, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })

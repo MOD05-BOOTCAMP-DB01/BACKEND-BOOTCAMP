@@ -77,7 +77,7 @@ export class Objective extends BaseEntity {
   quarter: string;
 
   @JoinColumn({ name: 'team_id' })
-  @OneToMany(() => Team, (team) => team.objectives, {
+  @ManyToOne(() => Team, (team) => team.objectives, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
