@@ -32,7 +32,7 @@ export class ObjectivesService {
       order: {
         createdAt: 'ASC',
       },
-      relations: ['owner'],
+      relations: ['owner', 'team'],
     });
   }
 
