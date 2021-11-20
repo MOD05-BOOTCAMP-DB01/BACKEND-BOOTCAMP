@@ -1,6 +1,6 @@
 import { Team } from '../team.entity';
 
 export class ReturnTeamDto {
-  checkin: Team;
+  team: Team;
   message: string;
 }
