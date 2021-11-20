@@ -1,26 +1,61 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { TeamRepository } from './teams.repository';
+import { UserRole } from '../users/user-roles.enum';
 import { CreateTeamDto } from './dtos/create-team.dto';
 import { UpdateTeamDto } from './dtos/update-team.dto';
+import { Team } from './team.entity';
 
 @Injectable()
 export class TeamsService {
-  create(createTeamDto: CreateTeamDto) {
-    return 'This action adds a new team';
+  constructor(
+    @InjectRepository(TeamRepository)
+    private teamRepository: TeamRepository,
+  ) {}
+
+  async createTeam(createTeamDto: CreateTeamDto): Promise<Team> {
+    return this.teamRepository.createTeam(createTeamDto, UserRole.MANAGER);
   }
 
-  findAll() {
-    return `This action returns all teams`;
+  async findAll() {
+    return this.teamRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} team`;
+  async findOne(teamId: string): Promise<Team> {
+    const team = await this.teamRepository.findOne(teamId, {
+      select: ['team', 'id'],
+    });
+
+    if (!team) throw new NotFoundException('Time não encontrado');
+
+    return team;
   }
 
-  update(id: number, updateTeamDto: UpdateTeamDto) {
-    return `This action updates a #${id} team`;
+  async updateTeam(updateTeamDto: UpdateTeamDto, id: string): Promise<Team> {
+    const tm = await this.findOne(id);
+    const { team } = updateTeamDto;
+    tm.team = team ? team : tm.team;
+
+    try {
+      await tm.save();
+      return tm;
+    } catch (error) {
+      throw new InternalServerErrorException(
+        'Erro ao atualizar os dados no banco de dados',
+      );
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} team`;
+  async deleteTeam(teamId: string) {
+    const result = await this.teamRepository.delete({ id: teamId });
+    if (result.affected === 0) {
+      throw new NotFoundException(
+        'Não foi encontrado um time com o ID informado',
+      );
+    }
   }
 }

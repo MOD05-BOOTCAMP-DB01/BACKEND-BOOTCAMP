@@ -2,7 +2,7 @@ import {
   ConflictException,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { Check, EntityRepository, Repository } from 'typeorm';
+import { EntityRepository, Repository } from 'typeorm';
 import { Checkin } from './checkin.entity';
 import { CreateCheckinDto } from './dtos/create-checkin.dto';
 import { UserRole } from '../users/user-roles.enum';
