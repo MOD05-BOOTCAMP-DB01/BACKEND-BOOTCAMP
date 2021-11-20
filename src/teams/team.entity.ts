@@ -22,6 +22,7 @@ export class Team extends BaseEntity {
   @ApiProperty({ description: 'Times da empresa' })
   team: string;
 
+  @JoinColumn({ name: 'team_id' })
   @OneToMany(() => User, (users) => users.team, {
     cascade: true,
   })

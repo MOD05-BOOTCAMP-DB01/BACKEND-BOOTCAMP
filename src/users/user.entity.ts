@@ -61,8 +61,7 @@ export class User extends BaseEntity {
   })
   key_results: KeyResult[];
 
-  @JoinColumn({ name: 'team_id' })
-  @ManyToOne(() => User, (users) => users.team, {
+  @ManyToOne(() => Team, (team) => team.users, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
