@@ -45,6 +45,14 @@ export class TeamsService {
     return objectives;
   }
 
+  async findUsersByTeam(teamId: string): Promise<Team[]> {
+    const team = await this.teamRepository.findUsersByTeam(teamId);
+
+    if (!team) throw new NotFoundException('Time não possui usuários');
+
+    return team;
+  }
+
   async updateTeam(updateTeamDto: UpdateTeamDto, id: string): Promise<Team> {
     const tm = await this.findOne(id);
     const { team } = updateTeamDto;

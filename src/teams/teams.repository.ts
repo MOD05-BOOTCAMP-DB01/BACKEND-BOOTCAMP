@@ -38,4 +38,12 @@ export class TeamRepository extends Repository<Team> {
     query.select(['team.id', 'objectives']);
     return await query.getMany();
   }
+
+  async findUsersByTeam(id: string): Promise<any> {
+    const query = this.createQueryBuilder('team');
+    query.where('team.id = :id', { id });
+    query.innerJoinAndSelect('team.users', 'users');
+    query.select(['team.id', 'users']);
+    return await query.getMany();
+  }
 }
