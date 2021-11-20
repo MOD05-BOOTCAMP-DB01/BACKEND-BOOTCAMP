@@ -16,7 +16,7 @@ export class UserRepository extends Repository<User> {
     createUserDto: CreateUserDto,
     role: UserRole,
   ): Promise<User> {
-    const { email, username, password } = createUserDto;
+    const { email, username, password, team } = createUserDto;
 
     const user = this.create();
     user.email = email;
@@ -25,7 +25,7 @@ export class UserRepository extends Repository<User> {
     user.status = true;
     user.salt = await bcrypt.genSalt();
     user.password = await this.hashPassword(password, user.salt);
-    user.team = null;
+    user.team = team;
 
     try {
       await user.save();

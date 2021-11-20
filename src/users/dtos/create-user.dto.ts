@@ -5,7 +5,9 @@ import {
   MaxLength,
   MinLength,
   Matches,
+  IsOptional,
 } from 'class-validator';
+import { Team } from 'src/teams/team.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
@@ -50,4 +52,7 @@ export class CreateUserDto {
   })
   @ApiProperty({ description: 'Confirmação da senha do usuário' })
   passwordConfirmation: string;
+
+  @IsOptional()
+  team: Team;
 }
