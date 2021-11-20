@@ -22,7 +22,9 @@ export class TeamsService {
   }
 
   async findAll() {
-    return this.teamRepository.find();
+    return this.teamRepository.find({
+      relations: ['users'],
+    });
   }
 
   async findOne(teamId: string): Promise<Team> {
