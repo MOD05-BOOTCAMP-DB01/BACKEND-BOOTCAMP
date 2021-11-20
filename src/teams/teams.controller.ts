@@ -52,6 +52,11 @@ export class TeamsController {
     };
   }
 
+  @Get('/:id/objectives')
+  async findObjectiveByTeam(@Param('id') id: string) {
+    return await this.teamsService.findObjectiveByTeam(id);
+  }
+
   @Patch(':id')
   async updateTeam(
     @Body(ValidationPipe) updateTeamDto: UpdateTeamDto,

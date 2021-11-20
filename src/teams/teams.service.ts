@@ -35,6 +35,14 @@ export class TeamsService {
     return team;
   }
 
+  async findObjectiveByTeam(teamId: string): Promise<Team[]> {
+    const objectives = await this.teamRepository.findObjectiveByTeam(teamId);
+
+    if (!objectives) throw new NotFoundException('Time não possui objetivos');
+
+    return objectives;
+  }
+
   async updateTeam(updateTeamDto: UpdateTeamDto, id: string): Promise<Team> {
     const tm = await this.findOne(id);
     const { team } = updateTeamDto;

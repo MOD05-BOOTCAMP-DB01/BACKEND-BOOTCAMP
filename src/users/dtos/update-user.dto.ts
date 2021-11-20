@@ -1,6 +1,7 @@
 import { UserRole } from '../user-roles.enum';
 import { IsString, IsEmail, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { Team } from 'src/teams/team.entity';
 
 export class UpdateUserDto {
   @IsOptional()
@@ -23,4 +24,8 @@ export class UpdateUserDto {
   @IsOptional()
   @ApiProperty({ description: 'Atividade do usuário' })
   status: boolean;
+
+  @IsOptional()
+  @ApiProperty({ description: 'Time do usuário' })
+  team: Team;
 }

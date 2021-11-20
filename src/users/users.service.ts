@@ -84,11 +84,12 @@ export class UsersService {
 
   async updateUser(updateUserDto: UpdateUserDto, id: string): Promise<User> {
     const user = await this.findOne(id);
-    const { username, email, role, status } = updateUserDto;
+    const { username, email, role, status, team } = updateUserDto;
     user.username = username ? username : user.username;
     user.email = email ? email : user.email;
     user.role = role ? role : user.role;
     user.status = status ? status : user.status;
+    user.team = team ? team : user.team;
 
     try {
       await user.save();
