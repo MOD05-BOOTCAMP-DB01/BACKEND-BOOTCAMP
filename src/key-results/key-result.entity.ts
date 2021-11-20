@@ -75,4 +75,12 @@ export class KeyResult extends BaseEntity {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @Column({ nullable: true, type: 'varchar', length: 50 })
+  @ApiProperty()
+  color: string;
+
+  @Column({ nullable: false, type: 'varchar', length: 100 })
+  @ApiProperty()
+  moonshot: string;
 }

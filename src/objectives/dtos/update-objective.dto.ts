@@ -1,5 +1,6 @@
 import { IsOptional } from 'class-validator';
 import { User } from 'src/users/user.entity';
+import { Team } from 'src/teams/team.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateObjectiveDto {
@@ -30,4 +31,16 @@ export class UpdateObjectiveDto {
   @IsOptional()
   @ApiProperty()
   owner: User;
+
+  @IsOptional()
+  @ApiProperty()
+  team: Team;
+
+  @IsOptional()
+  @ApiProperty()
+  year: string;
+
+  @IsOptional()
+  @ApiProperty()
+  quarter: string;
 }

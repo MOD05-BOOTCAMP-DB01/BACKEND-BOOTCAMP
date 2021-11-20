@@ -60,4 +60,14 @@ export class CreateKeyResultDto {
   objective: Objective;
 
   checkin: Checkin[];
+
+  @IsString()
+  @IsOptional()
+  @ApiProperty({ description: 'Cor opcional (feeling)' })
+  color: string;
+
+  @IsString()
+  @IsNotEmpty({ message: 'Informe o nível de desafio' })
+  @ApiProperty({ description: 'Classificar nível de desafio' })
+  moonshot: string;
 }

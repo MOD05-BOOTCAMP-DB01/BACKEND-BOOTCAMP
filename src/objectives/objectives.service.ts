@@ -59,15 +59,26 @@ export class ObjectivesService {
     id: string,
   ): Promise<Objective> {
     const obj = await this.findOne(id);
-    const { objective, type, initial_date, end_date, unity, area, owner } =
-      updateObjectiveDto;
+    const {
+      objective,
+      type,
+      initial_date,
+      end_date,
+      unity,
+      team,
+      owner,
+      year,
+      quarter,
+    } = updateObjectiveDto;
     obj.objective = objective ? objective : obj.objective;
     obj.type = type ? type : obj.type;
     obj.initial_date = initial_date ? initial_date : obj.initial_date;
     obj.end_date = end_date ? end_date : obj.end_date;
     obj.unity = unity ? unity : obj.unity;
-    obj.area = area ? area : obj.area;
+    obj.team = team ? team : obj.team;
     obj.owner = owner ? owner : obj.owner;
+    obj.year = year ? year : obj.year;
+    obj.quarter = quarter ? quarter : obj.quarter;
 
     try {
       await obj.save();

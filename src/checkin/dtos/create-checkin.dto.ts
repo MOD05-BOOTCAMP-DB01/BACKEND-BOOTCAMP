@@ -21,4 +21,9 @@ export class CreateCheckinDto {
   @IsOptional()
   @ApiProperty()
   comment: string;
+
+  @IsString()
+  @IsOptional()
+  @ApiProperty({ description: 'Cor opcional (feeling)' })
+  color: string;
 }

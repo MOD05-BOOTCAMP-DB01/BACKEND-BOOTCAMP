@@ -5,10 +5,13 @@ import {
   Column,
   Unique,
   OneToMany,
+  ManyToMany,
+  JoinColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Objective } from 'src/objectives/objective.entity';
 import { KeyResult } from 'src/key-results/key-result.entity';
+import { Team } from 'src/teams/team.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
@@ -57,6 +60,13 @@ export class User extends BaseEntity {
     cascade: true,
   })
   key_results: KeyResult[];
+
+  @JoinColumn({ name: 'team_id' })
+  @ManyToMany(() => User, (user) => user.team, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  team: Team;
 
   async checkPassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.salt);

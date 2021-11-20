@@ -54,4 +54,10 @@ export class UpdateKeyResultDto {
 
   @IsOptional()
   objective: Objective;
+
+  @IsOptional()
+  color: string;
+
+  @IsOptional()
+  moonshot: string;
 }

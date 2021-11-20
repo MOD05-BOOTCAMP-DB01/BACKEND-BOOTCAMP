@@ -25,6 +25,8 @@ export class KeyResultRepository extends Repository<KeyResult> {
       done,
       owner,
       objective,
+      color,
+      moonshot,
     } = createKeyResultDto;
     const kr = this.create();
     kr.key_result = key_result;
@@ -38,6 +40,8 @@ export class KeyResultRepository extends Repository<KeyResult> {
     kr.done = done;
     kr.owner = owner;
     kr.objective = objective;
+    kr.color = color;
+    kr.moonshot = moonshot;
 
     try {
       await kr.save();

@@ -2,6 +2,7 @@ import { IsString, IsNotEmpty, IsOptional, IsArray } from 'class-validator';
 import { User } from 'src/users/user.entity';
 import { Objective } from 'src/objectives/objective.entity';
 import { KeyResult } from 'src/key-results/key-result.entity';
+import { Team } from 'src/teams/team.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateObjectiveDto {
@@ -30,10 +31,9 @@ export class CreateObjectiveDto {
   @ApiProperty()
   unity: string;
 
-  @IsString()
-  @IsNotEmpty({ message: 'Informe uma área' })
+  @IsNotEmpty({ message: 'Informe um time' })
   @ApiProperty()
-  area: string;
+  team: Team;
 
   @IsNotEmpty({ message: 'Informe um proprietário' })
   @ApiProperty({ description: 'Proprietário do objetivo' })
@@ -45,4 +45,14 @@ export class CreateObjectiveDto {
 
   @IsOptional()
   objective_related: Objective;
+
+  @IsString()
+  @IsNotEmpty({ message: 'Informe um ano' })
+  @ApiProperty()
+  year: string;
+
+  @IsString()
+  @IsNotEmpty({ message: 'Informe um quarter' })
+  @ApiProperty()
+  quarter: string;
 }

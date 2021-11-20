@@ -34,4 +34,7 @@ export class Checkin extends BaseEntity {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @Column({ nullable: true, type: 'varchar', length: 50 })
+  color: string;
 }

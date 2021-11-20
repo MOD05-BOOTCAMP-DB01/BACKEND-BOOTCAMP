@@ -12,6 +12,7 @@ import {
 } from 'typeorm';
 import { User } from 'src/users/user.entity';
 import { KeyResult } from 'src/key-results/key-result.entity';
+import { Team } from 'src/teams/team.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
@@ -35,10 +36,6 @@ export class Objective extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', length: 100 })
   @ApiProperty({ description: 'Data final' })
   end_date: string;
-
-  @Column({ nullable: false, type: 'varchar', length: 50 })
-  @ApiProperty()
-  area: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })
   @ApiProperty()
@@ -70,4 +67,19 @@ export class Objective extends BaseEntity {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @Column({ nullable: false, type: 'varchar', length: 100 })
+  @ApiProperty()
+  year: string;
+
+  @Column({ nullable: false, type: 'varchar', length: 100 })
+  @ApiProperty()
+  quarter: string;
+
+  @JoinColumn({ name: 'team_id' })
+  @OneToMany(() => Team, (team) => team.objectives, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  team: Team;
 }

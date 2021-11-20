@@ -16,4 +16,9 @@ export class UpdateCheckinDto {
   @IsOptional()
   @ApiProperty()
   comment: string;
+
+  @IsString()
+  @IsOptional()
+  @ApiProperty()
+  color: string;
 }

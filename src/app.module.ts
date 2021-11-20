@@ -10,6 +10,7 @@ import { winstonConfig } from 'src/configs/winston.config';
 import { ObjectivesModule } from './objectives/objectives.module';
 import { KeyResultsModule } from './key-results/key-results.module';
 import { CheckinModule } from './checkin/checkin.module';
+import { TeamsModule } from './teams/teams.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CheckinModule } from './checkin/checkin.module';
     ObjectivesModule,
     KeyResultsModule,
     CheckinModule,
+    TeamsModule,
   ],
   controllers: [],
   providers: [

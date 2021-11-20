@@ -22,10 +22,12 @@ export class ObjectiveRepository extends Repository<Objective> {
       initial_date,
       end_date,
       unity,
-      area,
+      team,
       owner,
       key_results,
       objective_related,
+      year,
+      quarter,
     } = createObjectiveDto;
     const obj = this.create();
     obj.objective = objective;
@@ -33,10 +35,12 @@ export class ObjectiveRepository extends Repository<Objective> {
     obj.initial_date = initial_date;
     obj.end_date = end_date;
     obj.unity = unity;
-    obj.area = area;
+    obj.team = team;
     obj.owner = owner;
     obj.key_results = key_results;
     obj.objective_related = objective_related;
+    obj.year = year;
+    obj.quarter = quarter;
 
     try {
       await obj.save();

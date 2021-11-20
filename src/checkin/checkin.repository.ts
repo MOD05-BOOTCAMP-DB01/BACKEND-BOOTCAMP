@@ -2,7 +2,7 @@ import {
   ConflictException,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { EntityRepository, Repository } from 'typeorm';
+import { Check, EntityRepository, Repository } from 'typeorm';
 import { Checkin } from './checkin.entity';
 import { CreateCheckinDto } from './dtos/create-checkin.dto';
 import { UserRole } from '../users/user-roles.enum';
@@ -13,12 +13,14 @@ export class CheckinRepository extends Repository<Checkin> {
     createCheckinDto: CreateCheckinDto,
     role: UserRole,
   ): Promise<Checkin> {
-    const { date, current_value, key_result, comment } = createCheckinDto;
+    const { date, current_value, key_result, comment, color } =
+      createCheckinDto;
     const check = this.create();
     check.date = date;
     check.current_value = current_value;
     check.key_result = key_result;
     check.comment = comment;
+    check.color = color;
 
     try {
       await check.save();

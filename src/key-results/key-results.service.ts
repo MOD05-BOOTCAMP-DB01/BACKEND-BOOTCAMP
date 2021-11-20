@@ -62,6 +62,8 @@ export class KeyResultsService {
       done,
       owner,
       objective,
+      color,
+      moonshot,
     } = updateKeyResultDto;
     kr.key_result = key_result ? key_result : kr.key_result;
     kr.type = type ? type : kr.type;
@@ -74,6 +76,8 @@ export class KeyResultsService {
     kr.done = done ? done : kr.done;
     kr.owner = owner ? owner : kr.owner;
     kr.objective = objective ? objective : kr.objective;
+    kr.color = color ? color : kr.color;
+    kr.moonshot = moonshot ? moonshot : kr.moonshot;
 
     try {
       await kr.save();
