@@ -5,6 +5,7 @@ import {
   Column,
   Unique,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
 import { User } from 'src/users/user.entity';
 import { Objective } from 'src/objectives/objective.entity';
