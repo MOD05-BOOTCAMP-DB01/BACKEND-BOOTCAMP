@@ -48,11 +48,11 @@ export class KeyResult extends BaseEntity {
   status: number;
 
   @Column({ nullable: true, type: 'varchar', length: 120 })
-  @ApiProperty()
+  @ApiProperty({ description: 'Comentários extras' })
   comment: string;
 
   @Column({ nullable: true, type: 'boolean' })
-  @ApiProperty({ description: 'Comentários extras' })
+  @ApiProperty()
   done: boolean;
 
   @JoinColumn({ name: 'owner_id' })
