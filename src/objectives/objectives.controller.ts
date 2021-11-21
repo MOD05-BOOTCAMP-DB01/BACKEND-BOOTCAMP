@@ -9,6 +9,7 @@ import {
   Get,
   Patch,
   ForbiddenException,
+  HttpCode,
 } from '@nestjs/common';
 import { CreateObjectiveDto } from './dtos/create-objective.dto';
 import { ReturnObjectiveDto } from './dtos/return-objective.dto';
@@ -108,6 +109,7 @@ export class ObjectivesController {
   }
 
   @Delete('/:id')
+  @HttpCode(204)
   @Role(UserRole.MANAGER)
   @ApiOperation({ summary: 'Deleta objetivo pelo id' })
   @ApiOkResponse({ description: 'Objetivo excluído com sucesso' })

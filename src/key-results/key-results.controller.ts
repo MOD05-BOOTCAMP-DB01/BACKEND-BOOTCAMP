@@ -9,6 +9,7 @@ import {
   Get,
   Patch,
   ForbiddenException,
+  HttpCode,
 } from '@nestjs/common';
 import { CreateKeyResultDto } from './dtos/create-key-result.dto';
 import { ReturnKeyResultDto } from './dtos/return-key-result.dto';
@@ -99,7 +100,7 @@ export class KeyResultsController {
   }
 
   @Delete('/:id')
-  @Role(UserRole.USER)
+  @HttpCode(204)
   @ApiOperation({ summary: 'Exclui key result por id' })
   @ApiOkResponse({ description: 'Resultado-chave excluído com sucesso' })
   @ApiNotFoundResponse({

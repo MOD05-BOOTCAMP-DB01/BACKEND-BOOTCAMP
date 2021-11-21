@@ -51,10 +51,6 @@ export class CreateKeyResultDto {
   @ApiProperty({ description: 'Comentários extras' })
   comment: string;
 
-  @IsBoolean()
-  @ApiProperty()
-  done: boolean;
-
   owner: User;
 
   objective: Objective;

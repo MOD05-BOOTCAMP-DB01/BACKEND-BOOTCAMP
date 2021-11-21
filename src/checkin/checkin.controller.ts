@@ -9,6 +9,7 @@ import {
   Get,
   Patch,
   ForbiddenException,
+  HttpCode,
 } from '@nestjs/common';
 import { CreateCheckinDto } from './dtos/create-checkin.dto';
 import { ReturnCheckinDto } from './dtos/return-checkin.dto';
@@ -105,6 +106,7 @@ export class CheckinController {
   }
 
   @Delete('/:id')
+  @HttpCode(204)
   @ApiOperation({ summary: 'Exclui ckeck-in pelo id' })
   @ApiOkResponse({ description: 'Check-in excluído com sucesso' })
   @ApiNotFoundResponse({

@@ -9,6 +9,7 @@ import {
   Get,
   Patch,
   ForbiddenException,
+  HttpCode,
 } from '@nestjs/common';
 import { TeamsService } from './teams.service';
 import { CreateTeamDto } from './dtos/create-team.dto';
@@ -78,6 +79,7 @@ export class TeamsController {
   }
 
   @Delete(':id')
+  @HttpCode(204)
   @Role(UserRole.MANAGER)
   async deleteTeam(@Param('id') id: string) {
     await this.teamsService.deleteTeam(id);
