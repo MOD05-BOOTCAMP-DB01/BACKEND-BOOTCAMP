@@ -51,7 +51,7 @@ export class KeyResult extends BaseEntity {
   @ApiProperty({ description: 'Comentários extras' })
   comment: string;
 
-  @Column('boolean', { default: false })
+  @Column({ type: 'boolean' })
   @ApiProperty()
   done: boolean;
 

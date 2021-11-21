@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsOptional, IsBoolean } from 'class-validator';
+import { IsString, IsNumber, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { User } from 'src/users/user.entity';
 import { Objective } from 'src/objectives/objective.entity';
@@ -44,7 +44,6 @@ export class UpdateKeyResultDto {
   @ApiProperty({ description: 'Comentários extras' })
   comment: string;
 
-  @IsBoolean()
   @IsOptional()
   @ApiProperty()
   done: boolean;
