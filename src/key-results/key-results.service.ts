@@ -36,9 +36,7 @@ export class KeyResultsService {
   }
 
   async findOne(keyResultId: string): Promise<KeyResult> {
-    const kr = await this.keyResultRepository.findOne(keyResultId, {
-      select: ['key_result', 'type', 'frequency', 'id'],
-    });
+    const kr = await this.keyResultRepository.findOne(keyResultId);
 
     if (!kr) throw new NotFoundException('Resultado-chave não encontrado');
 
