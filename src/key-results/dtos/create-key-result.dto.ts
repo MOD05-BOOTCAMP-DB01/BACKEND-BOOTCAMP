@@ -51,6 +51,8 @@ export class CreateKeyResultDto {
   @ApiProperty({ description: 'Comentários extras' })
   comment: string;
 
+  done: boolean;
+
   owner: User;
 
   objective: Objective;

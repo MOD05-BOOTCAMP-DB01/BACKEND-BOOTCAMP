@@ -22,6 +22,7 @@ export class KeyResultRepository extends Repository<KeyResult> {
       goal_value,
       status,
       comment,
+      done,
       owner,
       objective,
       color,
@@ -36,6 +37,7 @@ export class KeyResultRepository extends Repository<KeyResult> {
     kr.goal_value = goal_value;
     kr.status = status;
     kr.comment = comment;
+    kr.done = done;
     kr.owner = owner;
     kr.objective = objective;
     kr.color = color;
