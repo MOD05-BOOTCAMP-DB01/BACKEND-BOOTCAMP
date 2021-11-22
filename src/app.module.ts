@@ -11,6 +11,7 @@ import { ObjectivesModule } from './objectives/objectives.module';
 import { KeyResultsModule } from './key-results/key-results.module';
 import { CheckinModule } from './checkin/checkin.module';
 import { TeamsModule } from './teams/teams.module';
+import { YearsModule } from './years/years.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { TeamsModule } from './teams/teams.module';
     KeyResultsModule,
     CheckinModule,
     TeamsModule,
+    YearsModule,
   ],
   controllers: [],
   providers: [
