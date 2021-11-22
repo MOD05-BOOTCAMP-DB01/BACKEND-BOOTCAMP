@@ -14,6 +14,7 @@ import { User } from 'src/users/user.entity';
 import { KeyResult } from 'src/key-results/key-result.entity';
 import { Team } from 'src/teams/team.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { Year } from 'src/years/year.entity';
 
 @Entity()
 @Unique(['id'])
@@ -68,9 +69,12 @@ export class Objective extends BaseEntity {
   @CreateDateColumn()
   createdAt: Date;
 
-  @Column({ nullable: false, type: 'varchar', length: 100 })
-  @ApiProperty()
-  year: string;
+  @JoinColumn({ name: 'year_id' })
+  @ManyToOne(() => Year, (year) => year.objectives, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  year: Year;
 
   @Column({ nullable: false, type: 'varchar', length: 100 })
   @ApiProperty()

@@ -2,6 +2,7 @@ import { IsOptional } from 'class-validator';
 import { User } from 'src/users/user.entity';
 import { Team } from 'src/teams/team.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { Year } from 'src/years/year.entity';
 
 export class UpdateObjectiveDto {
   @IsOptional()
@@ -38,7 +39,7 @@ export class UpdateObjectiveDto {
 
   @IsOptional()
   @ApiProperty()
-  year: string;
+  year: Year;
 
   @IsOptional()
   @ApiProperty()
