@@ -10,7 +10,7 @@ import { Objective } from 'src/objectives/objective.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
-@Unique(['id', 'year'])
+@Unique(['id'])
 export class Year extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @ApiProperty({ description: 'ID' })
