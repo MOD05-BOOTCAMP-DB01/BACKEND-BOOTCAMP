@@ -35,8 +35,8 @@ export class YearsService {
     return year;
   }
 
-  async findObjectiveByYear(yearId: string): Promise<Year[]> {
-    const years = await this.yearRepository.findObjectiveByYear(yearId);
+  async findObjectiveByYear(year: string): Promise<Year[]> {
+    const years = await this.yearRepository.findObjectiveByYear(year);
 
     if (!years) throw new NotFoundException('Ano não possui objetivos');
 

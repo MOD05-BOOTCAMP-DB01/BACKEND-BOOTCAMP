@@ -31,11 +31,11 @@ export class YearRepository extends Repository<Year> {
     }
   }
 
-  async findObjectiveByYear(id: string): Promise<any> {
+  async findObjectiveByYear(year: string): Promise<any> {
     const query = this.createQueryBuilder('year');
-    query.where('year.id = :id', { id });
+    query.where('year.year = :year', { year });
     query.innerJoinAndSelect('year.objectives', 'objectives');
-    query.select(['year.id', 'objectives']);
+    query.select(['year.year', 'objectives']);
     return await query.getMany();
   }
 }
