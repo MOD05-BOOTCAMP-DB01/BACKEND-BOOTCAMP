@@ -53,18 +53,18 @@ export class QuartersController {
     };
   }
 
-  // @Get('/:quarter/objectives')
-  // async findObjectiveByQuarter(@Param('quarter') quarter: string) {
-  //   return await this.quartersService.findObjectiveByQuarter(quarter);
-  // }
+  @Get('/:quarter/objectives')
+  async findObjectiveByQuarter(@Param('quarter') quarter: string) {
+    return await this.quartersService.findObjectiveByQuarter(quarter);
+  }
 
-  // @Get('/:quarter/:id/objectives')
-  // async findObjectiveByQuarterByTeam(
-  //   @Param('quarter') quarter: string,
-  //   @Param('id') id: string,
-  // ) {
-  //   return await this.quartersService.findObjectiveByQuarterByTeam(quarter, id);
-  // }
+  @Get('/:quarter/:id/objectives')
+  async findObjectiveByQuarterByTeam(
+    @Param('quarter') quarter: string,
+    @Param('id') id: string,
+  ) {
+    return await this.quartersService.findObjectiveByQuarterByTeam(quarter, id);
+  }
 
   @Patch(':id')
   async updateQuarter(

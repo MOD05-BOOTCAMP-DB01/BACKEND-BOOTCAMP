@@ -38,30 +38,30 @@ export class QuartersService {
     return quarter;
   }
 
-  // async findObjectiveByQuarter(quarter: string): Promise<Quarter[]> {
-  //   const quarters = await this.quarterRepository.findObjectiveByQuarter(
-  //     quarter,
-  //   );
+  async findObjectiveByQuarter(quarter: string): Promise<Quarter[]> {
+    const quarters = await this.quarterRepository.findObjectiveByQuarter(
+      quarter,
+    );
 
-  //   if (!quarters) throw new NotFoundException('Quarter não possui objetivos');
+    if (!quarters) throw new NotFoundException('Quarter não possui objetivos');
 
-  //   return quarters;
-  // }
+    return quarters;
+  }
 
-  // async findObjectiveByQuarterByTeam(
-  //   quarter: string,
-  //   id: string,
-  // ): Promise<any> {
-  //   const quarters = await this.quarterRepository.findObjectiveByQuarterByTeam(
-  //     quarter,
-  //     id,
-  //   );
+  async findObjectiveByQuarterByTeam(
+    quarter: string,
+    id: string,
+  ): Promise<any> {
+    const quarters = await this.quarterRepository.findObjectiveByQuarterByTeam(
+      quarter,
+      id,
+    );
 
-  //   if (!quarters)
-  //     throw new NotFoundException('Time não possui objetivos com esse quarter');
+    if (!quarters)
+      throw new NotFoundException('Time não possui objetivos com esse quarter');
 
-  //   return quarters;
-  // }
+    return quarters;
+  }
 
   async updateQuarter(
     updateQuarterDto: UpdateQuarterDto,

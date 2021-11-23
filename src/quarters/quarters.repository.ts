@@ -31,25 +31,25 @@ export class QuarterRepository extends Repository<Quarter> {
     }
   }
 
-  // async findObjectiveByQuarter(quarter: string): Promise<any> {
-  //   const query = this.createQueryBuilder('quarter');
-  //   query.where('quarter.quarter = :quarter', { quarter });
-  //   query.innerJoinAndSelect('quarter.objectives', 'objectives');
-  //   query.innerJoinAndSelect('objectives.team', 'team');
-  //   query.select(['quarter.quarter', 'objectives', 'team']);
-  //   return await query.getMany();
-  // }
+  async findObjectiveByQuarter(quarter: string): Promise<any> {
+    const query = this.createQueryBuilder('quarter');
+    query.where('quarter.quarter = :quarter', { quarter });
+    query.innerJoinAndSelect('quarter.objectives', 'objectives');
+    query.innerJoinAndSelect('objectives.team', 'team');
+    query.select(['quarter.quarter', 'objectives', 'team']);
+    return await query.getMany();
+  }
 
-  // async findObjectiveByQuarterByTeam(
-  //   quarter: string,
-  //   id: string,
-  // ): Promise<any> {
-  //   const query = this.createQueryBuilder('quarter');
-  //   query.where('quarter.quarter = :quarter', { quarter });
-  //   query.andWhere('team.id = :id', { id });
-  //   query.innerJoinAndSelect('quarter.objectives', 'objectives');
-  //   query.innerJoinAndSelect('objectives.team', 'team');
-  //   query.select(['quarter.quarter', 'objectives', 'team']);
-  //   return await query.getMany();
-  // }
+  async findObjectiveByQuarterByTeam(
+    quarter: string,
+    id: string,
+  ): Promise<any> {
+    const query = this.createQueryBuilder('quarter');
+    query.where('quarter.quarter = :quarter', { quarter });
+    query.andWhere('team.id = :id', { id });
+    query.innerJoinAndSelect('quarter.objectives', 'objectives');
+    query.innerJoinAndSelect('objectives.team', 'team');
+    query.select(['quarter.quarter', 'objectives', 'team']);
+    return await query.getMany();
+  }
 }
