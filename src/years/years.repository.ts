@@ -35,7 +35,8 @@ export class YearRepository extends Repository<Year> {
     const query = this.createQueryBuilder('year');
     query.where('year.year = :year', { year });
     query.innerJoinAndSelect('year.objectives', 'objectives');
-    query.select(['year.year', 'objectives']);
+    query.innerJoinAndSelect('objectives.team', 'team');
+    query.select(['year.year', 'objectives', 'team']);
     return await query.getMany();
   }
 }
