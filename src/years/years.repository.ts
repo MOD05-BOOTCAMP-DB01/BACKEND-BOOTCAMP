@@ -37,7 +37,7 @@ export class YearRepository extends Repository<Year> {
     query.innerJoinAndSelect('year.objectives', 'objectives');
     query.innerJoinAndSelect('objectives.team', 'team');
     query.innerJoinAndSelect('objectives.owner', 'owner');
-    query.select(['year.year', 'objectives', 'team', 'owner']);
+    query.select(['year.year', 'objectives', 'team', 'owner.username']);
     return await query.getMany();
   }
 
@@ -47,7 +47,8 @@ export class YearRepository extends Repository<Year> {
     query.andWhere('team.id = :id', { id });
     query.innerJoinAndSelect('year.objectives', 'objectives');
     query.innerJoinAndSelect('objectives.team', 'team');
-    query.select(['year.year', 'objectives', 'team']);
+    query.innerJoinAndSelect('objectives.owner', 'owner');
+    query.select(['year.year', 'objectives', 'team', 'owner.username']);
     return await query.getMany();
   }
 }
