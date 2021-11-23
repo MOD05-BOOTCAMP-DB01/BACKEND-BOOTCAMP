@@ -36,7 +36,8 @@ export class QuarterRepository extends Repository<Quarter> {
     query.where('quarter.quarter = :quarter', { quarter });
     query.innerJoinAndSelect('quarter.objectives', 'objectives');
     query.innerJoinAndSelect('objectives.team', 'team');
-    query.select(['quarter.quarter', 'objectives', 'team']);
+    query.innerJoinAndSelect('objectives.owner', 'owner');
+    query.select(['quarter.quarter', 'objectives', 'team', 'owner.username']);
     return await query.getMany();
   }
 
@@ -49,7 +50,8 @@ export class QuarterRepository extends Repository<Quarter> {
     query.andWhere('team.id = :id', { id });
     query.innerJoinAndSelect('quarter.objectives', 'objectives');
     query.innerJoinAndSelect('objectives.team', 'team');
-    query.select(['quarter.quarter', 'objectives', 'team']);
+    query.innerJoinAndSelect('objectives.owner', 'owner');
+    query.select(['quarter.quarter', 'objectives', 'team', 'owner.username']);
     return await query.getMany();
   }
 }
