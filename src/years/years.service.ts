@@ -43,6 +43,15 @@ export class YearsService {
     return years;
   }
 
+  async findObjectiveByYearByTeam(year: string, id: string): Promise<any> {
+    const years = await this.yearRepository.findObjectiveByYearByTeam(year, id);
+
+    if (!years)
+      throw new NotFoundException('Time não possui objetivos com esse ano');
+
+    return years;
+  }
+
   async updateYear(updateYearDto: UpdateYearDto, id: string): Promise<Year> {
     const ano = await this.findOne(id);
     const { year } = updateYearDto;

@@ -58,6 +58,14 @@ export class YearsController {
     return await this.yearsService.findObjectiveByYear(id);
   }
 
+  @Get('/:year/:id/objectives')
+  async findObjectiveByYearByTeam(
+    @Param('year') year: string,
+    @Param('id') id: string,
+  ) {
+    return await this.yearsService.findObjectiveByYearByTeam(year, id);
+  }
+
   @Patch(':id')
   async updateYear(
     @Body(ValidationPipe) updateYearDto: UpdateYearDto,

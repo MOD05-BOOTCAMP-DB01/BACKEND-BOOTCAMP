@@ -39,4 +39,14 @@ export class YearRepository extends Repository<Year> {
     query.select(['year.year', 'objectives', 'team']);
     return await query.getMany();
   }
+
+  async findObjectiveByYearByTeam(year: string, id: string): Promise<any> {
+    const query = this.createQueryBuilder('year');
+    query.where('year.year = :year', { year });
+    query.andWhere('team.id = :id', { id });
+    query.innerJoinAndSelect('year.objectives', 'objectives');
+    query.innerJoinAndSelect('objectives.team', 'team');
+    query.select(['year.year', 'objectives', 'team']);
+    return await query.getMany();
+  }
 }
