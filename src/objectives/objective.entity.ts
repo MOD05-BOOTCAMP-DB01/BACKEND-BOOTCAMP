@@ -15,6 +15,7 @@ import { KeyResult } from 'src/key-results/key-result.entity';
 import { Team } from 'src/teams/team.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { Year } from 'src/years/year.entity';
+import { Quarter } from 'src/quarters/quarter.entity';
 
 @Entity()
 @Unique(['id'])
@@ -76,9 +77,12 @@ export class Objective extends BaseEntity {
   })
   year: Year;
 
-  @Column({ nullable: false, type: 'varchar', length: 100 })
-  @ApiProperty()
-  quarter: string;
+  @JoinColumn({ name: 'quarter_id' })
+  @ManyToOne(() => Quarter, (quarter) => quarter.objectives, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  quarter: Quarter;
 
   @JoinColumn({ name: 'team_id' })
   @ManyToOne(() => Team, (team) => team.objectives, {

@@ -76,6 +76,7 @@ export class UsersService {
 
   async findOne(userId: string): Promise<User> {
     const user = await this.userRepository.findOne(userId, {
+      relations: ['team'],
       select: ['id', 'email', 'username', 'role', 'status', 'team'],
     });
 

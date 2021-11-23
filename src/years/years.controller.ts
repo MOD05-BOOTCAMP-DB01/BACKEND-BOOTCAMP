@@ -22,7 +22,7 @@ import { UserRole } from '../users/user-roles.enum';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/users/user.entity';
 
-@Controller('Years')
+@Controller('years')
 @UseGuards(AuthGuard(), RolesGuard)
 export class YearsController {
   constructor(private yearsService: YearsService) {}

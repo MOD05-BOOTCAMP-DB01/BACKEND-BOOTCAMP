@@ -5,6 +5,7 @@ import { KeyResult } from 'src/key-results/key-result.entity';
 import { Team } from 'src/teams/team.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { Year } from 'src/years/year.entity';
+import { Quarter } from 'src/quarters/quarter.entity';
 
 export class CreateObjectiveDto {
   @IsString()
@@ -47,13 +48,11 @@ export class CreateObjectiveDto {
   @IsOptional()
   objective_related: Objective;
 
-  @IsString()
   @IsNotEmpty({ message: 'Informe um ano' })
   @ApiProperty()
   year: Year;
 
-  @IsString()
   @IsNotEmpty({ message: 'Informe um quarter' })
   @ApiProperty()
-  quarter: string;
+  quarter: Quarter;
 }

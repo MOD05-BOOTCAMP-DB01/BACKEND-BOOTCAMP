@@ -12,6 +12,7 @@ import { KeyResultsModule } from './key-results/key-results.module';
 import { CheckinModule } from './checkin/checkin.module';
 import { TeamsModule } from './teams/teams.module';
 import { YearsModule } from './years/years.module';
+import { QuartersModule } from './quarters/quarters.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { YearsModule } from './years/years.module';
     CheckinModule,
     TeamsModule,
     YearsModule,
+    QuartersModule,
   ],
   controllers: [],
   providers: [
