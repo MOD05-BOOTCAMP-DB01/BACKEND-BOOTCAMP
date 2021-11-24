@@ -87,8 +87,8 @@ export class TeamsController {
   @ApiOperation({ summary: 'Busca usuários de um time especificado pelo id' })
   @ApiOkResponse({ description: 'Usuários encontrados com sucesso' })
   @ApiNotFoundResponse({ description: 'Time não possui usuários' })
-  @ApiNotFoundResponse({description: 'Time não possui usuários'})
-  @ApiNotFoundResponse({description: 'Time não possui usuários'})
+  @ApiNotFoundResponse({ description: 'Time não possui usuários' })
+  @ApiNotFoundResponse({ description: 'Time não possui usuários' })
   async findUsersByTeam(@Param('id') id: string) {
     return await this.teamsService.findUsersByTeam(id);
   }

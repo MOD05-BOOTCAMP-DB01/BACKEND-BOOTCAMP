@@ -1,48 +1,48 @@
 import { IsOptional } from 'class-validator';
 import { User } from 'src/users/user.entity';
 import { Team } from 'src/teams/team.entity';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Year } from 'src/years/year.entity';
 import { Quarter } from 'src/quarters/quarter.entity';
 
 export class UpdateObjectiveDto {
   @IsOptional()
-  @ApiProperty({ description: 'Especificar objetivo' })
+  @ApiPropertyOptional({ description: 'Especificar objetivo' })
   objective: string;
 
   @IsOptional()
-  @ApiProperty({ description: 'Tipo de objetivo' })
+  @ApiPropertyOptional({ description: 'Tipo de objetivo' })
   type: string;
 
   @IsOptional()
-  @ApiProperty({ description: 'Data inicial' })
+  @ApiPropertyOptional({ description: 'Data inicial' })
   initial_date: string;
 
   @IsOptional()
-  @ApiProperty({ description: 'Data final' })
+  @ApiPropertyOptional({ description: 'Data final' })
   end_date: string;
 
   @IsOptional()
-  @ApiProperty()
+  @ApiPropertyOptional()
   unity: string;
 
   @IsOptional()
-  @ApiProperty()
+  @ApiPropertyOptional()
   area: string;
 
   @IsOptional()
-  @ApiProperty()
+  @ApiPropertyOptional()
   owner: User;
 
   @IsOptional()
-  @ApiProperty()
+  @ApiPropertyOptional()
   team: Team;
 
   @IsOptional()
-  @ApiProperty()
+  @ApiPropertyOptional()
   year: Year;
 
   @IsOptional()
-  @ApiProperty()
+  @ApiPropertyOptional()
   quarter: Quarter;
 }

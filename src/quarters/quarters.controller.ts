@@ -21,7 +21,17 @@ import { Role } from '../auth/role.decorator';
 import { UserRole } from '../users/user-roles.enum';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/users/user.entity';
-import { ApiConflictResponse, ApiCreatedResponse, ApiForbiddenResponse, ApiInternalServerErrorResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiConflictResponse,
+  ApiCreatedResponse,
+  ApiForbiddenResponse,
+  ApiInternalServerErrorResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 @ApiTags('Quarters')
 @Controller('quarters')
@@ -67,17 +77,19 @@ export class QuartersController {
   }
 
   @Get('/:quarter/objectives')
-  @ApiOperation({summary: 'Busca objetivos para um quarter específico'})
-  @ApiResponse({description: 'Objetivos encontrados com sucesso'})
-  @ApiNotFoundResponse({description: 'Quarter não possui objetivos'})
+  @ApiOperation({ summary: 'Busca objetivos para um quarter específico' })
+  @ApiResponse({ description: 'Objetivos encontrados com sucesso' })
+  @ApiNotFoundResponse({ description: 'Quarter não possui objetivos' })
   async findObjectiveByQuarter(@Param('quarter') quarter: string) {
     return await this.quartersService.findObjectiveByQuarter(quarter);
   }
 
   @Get('/:quarter/:id/objectives')
-  @ApiOperation({summary: 'Busca objetivos por quarter e time específicos'})
-  @ApiOkResponse({description: 'Objetivos encontrados com sucesso'})
-  @ApiNotFoundResponse({description: 'Time não possui objetivos com esse quarter'})
+  @ApiOperation({ summary: 'Busca objetivos por quarter e time específicos' })
+  @ApiOkResponse({ description: 'Objetivos encontrados com sucesso' })
+  @ApiNotFoundResponse({
+    description: 'Time não possui objetivos com esse quarter',
+  })
   async findObjectiveByQuarterByTeam(
     @Param('quarter') quarter: string,
     @Param('id') id: string,
