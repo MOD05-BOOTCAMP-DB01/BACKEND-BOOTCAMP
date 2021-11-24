@@ -21,7 +21,16 @@ import { Role } from '../auth/role.decorator';
 import { UserRole } from '../users/user-roles.enum';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/users/user.entity';
-import { ApiConflictResponse, ApiCreatedResponse, ApiForbiddenResponse, ApiInternalServerErrorResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import {
+  ApiConflictResponse,
+  ApiCreatedResponse,
+  ApiForbiddenResponse,
+  ApiInternalServerErrorResponse,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
 
 @ApiTags('Teams')
 @Controller('teams')
@@ -36,7 +45,7 @@ export class TeamsController {
   @ApiInternalServerErrorResponse({
     description: 'Erro ao salvar o time no banco de dados',
   })
-  @ApiConflictResponse({description: 'Time já cadastrado!'})
+  @ApiConflictResponse({ description: 'Time já cadastrado!' })
   async createTeam(
     @Body(ValidationPipe) createTeamDto: CreateTeamDto,
   ): Promise<ReturnTeamDto> {
@@ -55,9 +64,9 @@ export class TeamsController {
   }
 
   @Get('/:id')
-  @ApiOperation({summary: 'Busca time pelo id'})
-  @ApiOkResponse({description: 'Time encontrado'})
-  @ApiNotFoundResponse({ description: 'Time não encontrado'})
+  @ApiOperation({ summary: 'Busca time pelo id' })
+  @ApiOkResponse({ description: 'Time encontrado' })
+  @ApiNotFoundResponse({ description: 'Time não encontrado' })
   async findOne(@Param('id') id: string): Promise<ReturnTeamDto> {
     const team = await this.teamsService.findOne(id);
     return {
@@ -67,17 +76,17 @@ export class TeamsController {
   }
 
   @Get('/:id/objectives')
-  @ApiOperation({summary: 'Busca objetivos de um time especificado pelo id'})
-  @ApiOkResponse({description: 'Objetivos encontrados com sucesso'})
-  @ApiNotFoundResponse({description: 'Time não possui objetivos'})
+  @ApiOperation({ summary: 'Busca objetivos de um time especificado pelo id' })
+  @ApiOkResponse({ description: 'Objetivos encontrados com sucesso' })
+  @ApiNotFoundResponse({ description: 'Time não possui objetivos' })
   async findObjectiveByTeam(@Param('id') id: string) {
     return await this.teamsService.findObjectiveByTeam(id);
   }
 
   @Get('/:id/users')
-  @ApiOperation({summary: 'Busca usuários de um time especificado pelo id'})
-  @ApiOkResponse({description: 'Usuários encontrados com sucesso'})
-  @ApiNotFoundResponse({description: 'Time não possui usuários'})
+  @ApiOperation({ summary: 'Busca usuários de um time especificado pelo id' })
+  @ApiOkResponse({ description: 'Usuários encontrados com sucesso' })
+  @ApiNotFoundResponse({ description: 'Time não possui usuários' })
   async findUsersByTeam(@Param('id') id: string) {
     return await this.teamsService.findUsersByTeam(id);
   }
