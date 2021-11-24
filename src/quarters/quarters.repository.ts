@@ -25,7 +25,7 @@ export class QuarterRepository extends Repository<Quarter> {
         throw new ConflictException('Quarter já cadastrado!');
       } else {
         throw new InternalServerErrorException(
-          'Erro ao salvar o ano no banco de dados',
+          'Erro ao salvar o quarter no banco de dados',
         );
       }
     }
