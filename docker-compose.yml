@@ -12,6 +12,10 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
+      NODE_ENV: production
+  build:
+      context: .
+      dockerfile: ./Dockerfile
 
 volumes:
   pg-data:
