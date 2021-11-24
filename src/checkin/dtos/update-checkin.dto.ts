@@ -1,24 +1,24 @@
 import { IsString, IsNumber, IsOptional } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class UpdateCheckinDto {
   @IsString()
   @IsOptional()
-  @ApiProperty()
+  @ApiPropertyOptional()
   date: string;
 
   @IsNumber()
   @IsOptional()
-  @ApiProperty()
+  @ApiPropertyOptional()
   current_value: number;
 
   @IsString()
   @IsOptional()
-  @ApiProperty()
+  @ApiPropertyOptional()
   comment: string;
 
   @IsString()
   @IsOptional()
-  @ApiProperty()
+  @ApiPropertyOptional()
   color: string;
 }
