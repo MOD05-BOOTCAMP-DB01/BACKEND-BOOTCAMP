@@ -38,7 +38,7 @@ export class TeamRepository extends Repository<Team> {
     query.innerJoinAndSelect('objectives.owner', 'owner');
     query.innerJoinAndSelect('objectives.year', 'year');
     query.innerJoinAndSelect('objectives.quarter', 'quarter');
-    query.select(['team.id', 'objectives', 'owner', 'year', 'quarter']);
+    query.select(['team', 'objectives', 'owner', 'year', 'quarter']);
     return await query.getMany();
   }
 
